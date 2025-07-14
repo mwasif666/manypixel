@@ -1,0 +1,153 @@
+.section_achievements {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+.padding_global {
+  padding: 0 15px;
+}
+
+.achivments_numbers {
+  grid-row-gap: 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+}
+
+.achivments_numbers_items {
+  grid-row-gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+}
+
+.achievements_numbers_heading {
+  color: #ef457e;
+  text-transform: uppercase;
+  border-bottom: 0.25rem solid #ef457e33;
+  width: fit-content;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 3.5rem;
+}
+
+.text_regular {
+  font-family: Geomanist, sans-serif;
+  font-size: 1.25rem;
+  padding-bottom: 35px;
+}
+
+.achievements_grid {
+  grid-column-gap: 1.25rem;
+  grid-row-gap: 1.25rem;
+  background-color: #f8f8f8;
+  border-radius: 0.75rem;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto auto auto;
+  grid-auto-columns: 1fr;
+  place-content: space-between;
+  align-self: stretch;
+  place-items: center;
+  width: 59.938rem;
+  height: 16.875rem;
+  padding: 3.75rem 2.625rem;
+  display: grid;
+}
+
+.achievements_logo {
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.achievements_logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Logo specific adjustments */
+.logo1 {
+  width: 170px;
+  height: 30px;
+}
+
+.logo2 {
+  width: 140px;
+  height: 30px;
+}
+
+.logo3 {
+  width: 140px;
+  height: 60px;
+}
+
+.logo4 {
+  width: 140px;
+  height: 60px;
+}
+
+.logo5 {
+  width: 120px;
+  height: 50px;
+}
+
+.logo6 {
+  width: 150px;
+  height: 40px;
+}
+
+.logo7 {
+  width: 100px;
+  height: 50px;
+}
+
+.logo8 {
+  width: 120px;
+  height: 40px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .achievements_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .achievements_numbers {
+    gap: 60px;
+  }
+
+  .achievements_numbers_heading {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section_achievements {
+    padding: 60px 0;
+  }
+
+  .achievements_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+  }
+
+  .achievements_numbers {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .achievements_numbers_heading {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 576px) {
+  .achievements_numbers_heading {
+    font-size: 32px;
+  }
+
+  .text_regular {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,175 @@
+/* WorkGrid.module.css */
+.sectionWork {
+  position: relative;
+}
+
+.paddingGlobal {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+.containerLarge {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.paddingSectionMedium {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.workComponent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headingWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+  width: 100%;
+}
+
+.left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.textSizeTiny {
+  color: var(--colors--pink);
+  text-transform: uppercase;
+  font-family: "Mulish", sans-serif !important;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 175%;
+}
+
+.headingStyleH2 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 133%;
+}
+
+.smaller {
+  font-size: 36px;
+}
+
+.workGrid {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.workColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
+}
+
+.workItem {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+}
+
+.normalHeight {
+  height: 300px;
+}
+
+.tallHeight {
+  height: 400px;
+}
+
+.workBg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.workGrad {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+  z-index: 1;
+}
+
+.workImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.workItem:hover .workImage {
+  transform: scale(1.05);
+}
+
+.headingStyleH5 {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 600;
+  z-index: 2;
+  margin: 0;
+  color: white;
+}
+
+.button {
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 175%;
+  transition: all 0.3s ease-out;
+  font-family: "Mulish", sans-serif !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 0.0625rem solid #0099f6;
+  color: #0099f6;
+  background-color: #0000;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: #0099f6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .workGrid {
+    flex-direction: column;
+  }
+
+  .headingStyleH2 {
+    font-size: 2.5rem;
+  }
+
+  .smaller {
+    font-size: 28px;
+  }
+
+  .normalHeight,
+  .tallHeight {
+    height: 250px;
+  }
+}

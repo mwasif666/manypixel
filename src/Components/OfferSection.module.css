@@ -1,0 +1,78 @@
+.paddingGlobal {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.containerLarge {
+  max-width: 1100px;
+}
+
+.paddingSectionMedium {
+  padding: 40px 0;
+}
+
+.offerComponent {
+  text-align: center;
+}
+
+.headingWrapper {
+  margin-bottom: 40px;
+}
+
+.textSizeTini {
+  color: var(--colors--pink);
+  text-transform: uppercase;
+  font-family: "Mulish", sans-serif !important;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 175%;
+}
+
+.headingStyleH2 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 133%;
+}
+
+.offerItem {
+  background-color: #f5f5f5;
+  padding: 60px 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offerTextWrapper {
+  text-align: start;
+}
+
+.offerTextWrapper h3 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #333;
+  line-height: 150%;
+}
+
+.textSizeSmall {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* For responsiveness and layout */
+.row-cols-md-2 .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.g-4 {
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .offerItem {
+    margin-bottom: 30px;
+  }
+}

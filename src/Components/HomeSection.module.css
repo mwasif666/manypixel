@@ -1,0 +1,112 @@
+.sectionAboutHome {
+  background-color: #ffffff;
+}
+
+.paddingGlobal {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.paddingSectionMedium {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.aboutHomeComponent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.aboutHomeItem {
+  flex: 1;
+}
+
+.maxWidthTablet {
+  max-width: 600px;
+}
+
+.aboutHomeHeadingWrapper {
+  margin-bottom: 2rem;
+}
+
+.textSizeTini {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.headingStyleH2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.smaller {
+  font-size: 2rem;
+}
+
+.aboutHomeList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.aboutHomeListItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.aboutHomeListIcon {
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: #3b82f6;
+  border-radius: 0;
+}
+
+.textSizeLarge {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #4b5563;
+}
+
+.createRequestBtn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+}
+
+.aboutHomeGif {
+  flex: 1;
+  max-width: 50%;
+}
+
+.lottieAnimation {
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .aboutHomeComponent {
+    flex-direction: column;
+  }
+
+  .aboutHomeGif {
+    max-width: 100%;
+    order: -1;
+    margin-bottom: 2rem;
+  }
+
+  .headingStyleH2,
+  .smaller {
+    font-size: 1.75rem;
+  }
+}

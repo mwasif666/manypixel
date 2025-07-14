@@ -1,0 +1,21 @@
+.section_advatages {
+  padding-top: 50px;
+}
+.text_size_tini {
+  color: var(--colors--pink);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 175%;
+}
+.heading_style_h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 133%;
+}
+.text_size_large {
+  font-family: Geomanist, sans-serif;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  padding-top: 30px;
+}
