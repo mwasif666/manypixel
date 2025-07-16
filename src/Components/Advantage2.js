@@ -32,7 +32,7 @@ const Advantage2Section = () => {
                 </div>
 
                 {/* Image - Order changes on mobile */}
-                <div className="col-lg-6 d-flex justify-content-end">
+                <div className="col-lg-6 d-flex justify-content-end ">
                   <img
                     className={`${styles.advantages_image} ${styles.image_2}`}
                     src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1).avif"

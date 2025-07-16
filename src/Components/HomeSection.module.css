@@ -110,3 +110,10 @@
     font-size: 1.75rem;
   }
 }
+@media (max-width: 768px) {
+  .lottieAnimation img {
+    width: 100% !important;
+    height: auto !important;
+    margin: 50px 0px;
+  }
+}

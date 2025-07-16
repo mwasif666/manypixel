@@ -9,6 +9,7 @@ import Blog from "./Pages/Resources/Blog";
 import HelpCenter from "./Pages/Resources/HelpCenter";
 import Contact from "./Pages/Contact";
 import "./App.css";
+import FooterSection from "./Pages/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
+      <FooterSection />
     </Router>
   );
 }

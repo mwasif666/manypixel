@@ -8,6 +8,9 @@ import Technology from "../Components/Technology";
 import OfferSection from "../Components/OfferSection";
 import WorkGrid from "../Components/WorkGrid";
 import ToolsSection from "../Components/ToolsSection";
+import ReviewsSection from "../Components/Reviews";
+import TestimonialsSection from "../Components/TestimonialsSection";
+import CtaSection from "../Components/CtaSection";
 
 const Home = () => {
   return (
@@ -21,6 +24,9 @@ const Home = () => {
       <OfferSection />
       <WorkGrid />
       <ToolsSection />
+      <ReviewsSection />
+      <TestimonialsSection />
+      <CtaSection />
     </>
   );
 };

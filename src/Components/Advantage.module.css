@@ -19,3 +19,10 @@
   line-height: 2.25rem;
   padding-top: 30px;
 }
+@media (max-width: 768px) {
+  .section_advatages img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 50px;
+  }
+}
