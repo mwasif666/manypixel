@@ -60,6 +60,7 @@
   position: relative;
   transition: all 0.3s ease;
   background: transparent;
+  font-weight: 900;
 }
 
 .billing_toggle:hover {
@@ -70,6 +71,7 @@
   background: white;
   color: black;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  font-weight: 900;
 }
 
 .pricing_grid {
