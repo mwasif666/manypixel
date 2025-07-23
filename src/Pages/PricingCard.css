@@ -1,0 +1,161 @@
+.pricing-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.pricing-header p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.billing-toggle {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.billing-toggle:hover {
+  border-color: #999;
+}
+
+.savings-badge {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.pricing-item {
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.heading-style-h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.heading-style-h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.text-size-small {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.text-color-primary {
+  color: #000;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.text-color-primary .heading-style-h5 {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.billing-savings {
+  font-size: 0.9rem;
+  color: #ff5a5f;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.original-price {
+  font-size: 0.8rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+}
+
+.pricing-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.pricing-text-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pricing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pricing-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.pricing-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dis {
+  opacity: 0.5;
+}
+
+.tooltip-icon {
+  cursor: pointer;
+  color: #999;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.tooltip-icon:hover {
+  color: #000;
+}
+
+.tooltip-content {
+  max-width: 300px;
+  padding: 15px;
+}
+
+.tooltip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tooltip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tooltip-item {
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-bg {
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.pricing-tools {
+  height: 30px;
+  width: auto;
+}

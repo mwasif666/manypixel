@@ -429,11 +429,7 @@ const Navbar = () => {
             </div>
 
             {/* Regular Links */}
-            <Link
-              to="/our-work"
-              className="nav-item"
-              onClick={closeAllDropdowns}
-            >
+            <Link to="/work" className="nav-item" onClick={closeAllDropdowns}>
               <span className="nav-link">Our Work</span>
             </Link>
 

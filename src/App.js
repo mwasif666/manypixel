@@ -10,6 +10,8 @@ import HelpCenter from "./Pages/Resources/HelpCenter";
 import Contact from "./Pages/Contact";
 import "./App.css";
 import FooterSection from "./Pages/Footer";
+import OurWork from "./Pages/OurWork";
+import PricingCard from "./Pages/Pricing";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             path="/solutions/app-development"
             element={<AppDevelopment />}
           />
+          <Route path="/work" element={<OurWork />} />
+          <Route path="/pricing" element={<PricingCard />} />
           <Route path="/resources/blog" element={<Blog />} />
           <Route path="/resources/help-center" element={<HelpCenter />} />
           <Route path="/contact" element={<Contact />} />
