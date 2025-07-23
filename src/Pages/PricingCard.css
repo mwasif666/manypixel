@@ -1,77 +1,126 @@
-.pricing-header h1 {
+.pricing_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.pricing_header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pricing_header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
-.pricing-header p {
+.pricing_header p {
   font-size: 1.2rem;
   color: #666;
   margin-bottom: 2rem;
 }
 
-.billing-toggle {
+.billing_cycle_selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.billing_toggle {
   padding: 12px 20px;
+  border: 1px solid #ddd;
+  background: white;
   border-radius: 6px;
+  cursor: pointer;
   font-weight: 600;
   position: relative;
   transition: all 0.3s ease;
 }
 
-.billing-toggle:hover {
+.billing_toggle:hover {
   border-color: #999;
 }
 
-.savings-badge {
+.billing_toggle.active {
+  background: #000;
+  color: white;
+  border-color: #000;
+}
+
+.savings_badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff5a5f;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 20px;
   font-size: 0.7rem;
   font-weight: bold;
 }
 
-.pricing-item {
+.pricing_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.pricing_item {
   border: 1px solid #eaeaea;
   border-radius: 8px;
+  padding: 30px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pricing-item:hover {
+.pricing_item:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.heading-style-h4 {
+.pricing_top {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.heading_style_h4 {
   font-size: 1.5rem;
   font-weight: 700;
+  margin: 0;
 }
 
-.heading-style-h5 {
+.heading_style_h5 {
   font-size: 1.1rem;
   font-weight: 600;
+  margin: 0;
 }
 
-.text-size-small {
+.text_size_small {
   font-size: 0.9rem;
   color: #666;
 }
 
-.text-color-primary {
+.text_color_primary {
   color: #000;
   font-size: 2rem;
   font-weight: 700;
 }
 
-.text-color-primary .heading-style-h5 {
+.text_color_primary .heading_style_h5 {
   font-size: 1rem;
   color: #666;
   font-weight: 400;
 }
 
-.billing-savings {
+.billing_savings {
   font-size: 0.9rem;
   color: #ff5a5f;
   font-weight: 600;
   margin-left: 5px;
 }
 
-.original-price {
+.original_price {
   font-size: 0.8rem;
   color: #999;
   text-decoration: line-through;
@@ -80,32 +129,34 @@
 .divider {
   height: 1px;
   background: #eee;
+  margin: 15px 0;
 }
 
-.pricing-list-wrapper {
+.pricing_list_wrapper {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-.pricing-text-list-wrapper {
+.pricing_text_list_wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.pricing-list {
+.pricing_list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.pricing-list-item {
+.pricing_list_item {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.pricing-icon {
+.pricing_icon {
   width: 20px;
   height: 20px;
 }
@@ -114,48 +165,80 @@
   opacity: 0.5;
 }
 
-.tooltip-icon {
+.tooltip_icon {
   cursor: pointer;
   color: #999;
   width: 16px;
   height: 16px;
-  position: relative;
 }
 
-.tooltip-icon:hover {
+.tooltip_icon:hover {
   color: #000;
 }
 
-.tooltip-content {
+.tooltip_content {
   max-width: 300px;
   padding: 15px;
 }
 
-.tooltip-grid {
+.tooltip_grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-.tooltip-list {
+.tooltip_list {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.tooltip-item {
+.tooltip_item {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
-.tooltip-bg {
+.tooltip_bg {
   width: 8px;
   height: 8px;
   background: #000;
   border-radius: 50%;
 }
 
-.pricing-tools {
+.pricing_tools_wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.pricing_tools {
   height: 30px;
   width: auto;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: #333;
+}
+
+.width {
+  width: 100%;
+}
+
+.auto_top {
+  margin-top: auto;
 }

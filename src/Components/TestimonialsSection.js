@@ -67,7 +67,7 @@ const TestimonialsSection = () => {
   return (
     <div className={styles.section_testimonials}>
       <div className={styles.padding_global}>
-        <div className={styles.container_large}>
+        <div className="container">
           <div className={styles.padding_section_medium}>
             <div className={styles.testimonials_component}>
               {/* Mobile Dropdown */}

@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="content" style={{ padding: "2rem" }}>
+      <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
