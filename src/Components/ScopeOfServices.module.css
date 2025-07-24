@@ -1,0 +1,127 @@
+.sectionScope {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #07122b;
+  height: 360px;
+}
+
+.paddingSectionScope {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  position: relative;
+}
+
+.scopeComponent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.headingStyleH1 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: white;
+  padding-top: 50px;
+}
+
+.scopeHeading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.textSizeMediumX {
+  font-size: 1.3rem;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Decorative elements */
+.scopeDec1 {
+  position: absolute;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f4755faca58ffaca8e1e_Group%204822.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4.12513rem;
+  height: 4.12513rem;
+  top: 12.02rem;
+  left: 15rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec2 {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64789a0a94d2fcfd0eb19717_Frame%2048311.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 4rem;
+  left: 21rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec3 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f3c49370c9a514a3061a_5%20Rectangle.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 20%;
+  right: 9rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec4 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f50fe7f402b9cbee63bc_Rectangle%206521.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 60%;
+  right: 25%;
+  z-index: 1;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .headingStyleH1 {
+    font-size: 2rem;
+  }
+
+  .textSizeMediumX {
+    font-size: 1.1rem;
+  }
+
+  .scopeDec1,
+  .scopeDec2,
+  .scopeDec3,
+  .scopeDec4 {
+    display: none;
+  }
+
+  .paddingSectionScope {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .headingStyleH1 {
+    font-size: 1.75rem;
+  }
+
+  .textSizeMediumX {
+    font-size: 1rem;
+  }
+}

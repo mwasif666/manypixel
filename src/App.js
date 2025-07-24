@@ -12,6 +12,7 @@ import "./App.css";
 import FooterSection from "./Pages/Footer";
 import OurWork from "./Pages/OurWork";
 import PricingCard from "./Pages/Pricing";
+import Solution from "./Pages/Solution";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             element={<AppDevelopment />}
           />
           <Route path="/work" element={<OurWork />} />
+          <Route path="/solution" element={<Solution />} />
           <Route path="/pricing" element={<PricingCard />} />
           <Route path="/resources/blog" element={<Blog />} />
           <Route path="/resources/help-center" element={<HelpCenter />} />
