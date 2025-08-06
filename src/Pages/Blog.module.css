@@ -1,0 +1,385 @@
+/* Blog.module.css */
+.blogHome {
+  position: relative;
+  overflow: hidden;
+}
+
+.paddingGlobal {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.container-lg {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.paddingSectionBlogHome {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+.blogHomeBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.blogHomeDec {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100px;
+}
+
+.blogHomeDec2 {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  width: 120px;
+}
+
+.blogHomeDec3 {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+}
+
+.blogHomeComponent {
+  position: relative;
+}
+
+.workPageHeadingWrapper {
+  text-align: center;
+  margin-bottom: 60px;
+  height: 300px;
+}
+
+.workPageHeadingWrapper h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+  padding-top: 80px;
+}
+
+.textSizeLarge {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.blogList {
+  margin-bottom: 40px;
+}
+
+.blogItem {
+  margin-bottom: 40px;
+}
+
+.blogHomeLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.twelveColGrid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -15px;
+}
+
+.blogHomeItemHover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.blogCatThumbImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.blogHomeLink:hover .blogCatThumbImage {
+  transform: scale(1.05);
+}
+
+.blogHomeDecText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.blogHomeGrad {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.blogHomeLink:hover .blogHomeDecText,
+.blogHomeLink:hover .blogHomeGrad {
+  opacity: 1;
+}
+
+.blogHomeFeaturesTextWrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blogHomeFeaturesTextWrapper h1 {
+  letter-spacing: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2.7rem;
+  font-weight: 900;
+  line-height: 140%;
+  color: #07122b;
+}
+.twelveColGrid:hover h1 {
+  color: #0099f6;
+}
+
+.textSizeSmall {
+  font-family: "Geomanist", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 150%;
+  margin-top: 10px;
+}
+
+.textColorGrey {
+  color: #666;
+}
+
+.blogHomeFeaturesBottom {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tag {
+  background-color: #f2faff;
+  color: #27c1fb;
+  padding: 8px 30px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.blogDate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blogHomeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.textSizeTiny {
+  font-size: 14px;
+  color: #666;
+}
+
+.readtimeWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 60px 0;
+}
+
+.blogHomeWrapper {
+  margin-top: 40px;
+}
+
+.blogHomeItem {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.blogHomeItem:hover {
+  transform: translateY(-5px);
+}
+
+.blogHomeItemThumb {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.headingStyleH5 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.blogBottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.blogRank {
+  font-size: 14px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.isSecondary {
+  background-color: transparent;
+  border: 1px solid #1a1a1a;
+  color: #1a1a1a;
+}
+
+.isSecondary:hover {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.pag {
+  padding: 12px 40px;
+}
+/* Decorative elements */
+.scopeDec1 {
+  position: absolute;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f4755faca58ffaca8e1e_Group%204822.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4.12513rem;
+  height: 4.12513rem;
+  top: 12.02rem;
+  left: 15rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec2 {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64789a0a94d2fcfd0eb19717_Frame%2048311.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 4rem;
+  left: 21rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec3 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f3c49370c9a514a3061a_5%20Rectangle.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 20%;
+  right: 9rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec4 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f50fe7f402b9cbee63bc_Rectangle%206521.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 60%;
+  right: 25%;
+  z-index: 1;
+  opacity: 1;
+}
+/* Responsive styles */
+@media (max-width: 991px) {
+  .workPageHeadingWrapper h1 {
+    font-size: 36px;
+  }
+
+  .blogHomeFeaturesTextWrapper h2 {
+    font-size: 24px;
+  }
+
+  .blogHomeItemThumb {
+    height: 180px;
+  }
+}
+
+@media (max-width: 767px) {
+  .paddingSectionBlogHome {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .workPageHeadingWrapper h1 {
+    font-size: 28px;
+  }
+
+  .textSizeLarge {
+    font-size: 16px;
+  }
+
+  .blogHomeFeaturesTextWrapper h2 {
+    font-size: 20px;
+  }
+
+  .headingStyleH5 {
+    font-size: 18px;
+  }
+
+  .blogHomeItemThumb {
+    height: 150px;
+  }
+}

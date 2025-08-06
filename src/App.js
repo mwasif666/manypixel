@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home";
 import WebDevelopment from "./Pages/Solutions/WebDevelopment";
 import AppDevelopment from "./Pages/Solutions/AppDevelopment";
-import Blog from "./Pages/Resources/Blog";
+
 import HelpCenter from "./Pages/Resources/HelpCenter";
 import Contact from "./Pages/Contact";
 import "./App.css";
@@ -13,6 +13,8 @@ import FooterSection from "./Pages/Footer";
 import OurWork from "./Pages/OurWork";
 import PricingCard from "./Pages/Pricing";
 import Solution from "./Pages/Solution";
+import Blog from "./Pages/Blog";
+import BlogDetail from "./Components/BlogDetail";
 
 function App() {
   return (
@@ -32,7 +34,8 @@ function App() {
           <Route path="/work" element={<OurWork />} />
           <Route path="/solution" element={<Solution />} />
           <Route path="/pricing" element={<PricingCard />} />
-          <Route path="/resources/blog" element={<Blog />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/resources/help-center" element={<HelpCenter />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

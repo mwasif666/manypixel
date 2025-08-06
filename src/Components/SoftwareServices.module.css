@@ -27,7 +27,6 @@
 .scopeSoftwareList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
 }
 
 .scopeSoftwareListItem {
@@ -89,7 +88,7 @@
 .divider {
   height: 1px;
   background-color: #e9ecef;
-  margin: 2rem 0;
+  margin: 0.5rem 0;
 }
 
 @media (max-width: 768px) {

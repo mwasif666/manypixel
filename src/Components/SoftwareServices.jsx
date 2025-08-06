@@ -89,9 +89,9 @@ const SoftwareServices = () => {
                             alt={`${software.name} logo`}
                             className={styles.scopeSoftwareImage}
                           />
-                          <span className={styles.softwareShort}>
+                          {/* <span className={styles.softwareShort}>
                             {software.short}
-                          </span>
+                          </span> */}
                         </div>
                         <div className={styles.textSizeMediumX}>
                           {software.name}
