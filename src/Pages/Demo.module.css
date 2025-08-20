@@ -1,0 +1,129 @@
+.Demo {
+  padding: 80px 0px;
+  background-color: #f8f8f8;
+}
+.demoHeadingWrapper {
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+/* Decorative elements */
+.scopeDec1 {
+  position: absolute;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab33e01215443f94d9_Group%204824.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 2.12513rem;
+  height: 2.12513rem;
+  top: 12.02rem;
+  left: 15rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec2 {
+  position: absolute;
+  width: 2.12513rem;
+  height: 2.12513rem;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64789a0a94d2fcfd0eb19717_Frame%2048311.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 18rem;
+  left: 21rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec3 {
+  position: absolute;
+  width: 7.125rem;
+  height: 5.875rem;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f3c49370c9a514a3061a_5%20Rectangle.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 08%;
+  right: 17rem;
+  z-index: 1;
+  opacity: 1;
+}
+.scopeDec5 {
+  position: absolute;
+  width: 9.75rem;
+  height: 5.875rem;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6478a7a6e7bcfb09b4e7f4cc_Frame%2048312.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 25%;
+  left: 0rem;
+  z-index: 1;
+  opacity: 1;
+}
+
+.scopeDec4 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64f5f50fe7f402b9cbee63bc_Rectangle%206521.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 22%;
+  right: 25%;
+  z-index: 1;
+  opacity: 1;
+}
+
+.heading {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.subHeading {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.checkboxesWrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkboxItem {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.checkboxText h5 {
+  font-size: 1.1rem;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  .subHeading {
+    text-align: left;
+  }
+
+  .checkboxText {
+    font-size: 0.9rem;
+  }
+}

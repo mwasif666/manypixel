@@ -11,10 +11,15 @@ import Contact from "./Pages/Contact";
 import "./App.css";
 import FooterSection from "./Pages/Footer";
 import OurWork from "./Pages/OurWork";
-import PricingCard from "./Pages/Pricing";
+
 import Solution from "./Pages/Solution";
 import Blog from "./Pages/Blog";
 import BlogDetail from "./Components/BlogDetail";
+import GetStarted from "./Pages/GetStarted";
+import Signin from "./Pages/Signin";
+import ForgetPassword from "./Pages/Forget";
+import Demo from "./Pages/Demo";
+import Pricings from "./Pages/Pricings";
 
 function App() {
   return (
@@ -33,7 +38,11 @@ function App() {
           />
           <Route path="/work" element={<OurWork />} />
           <Route path="/solution" element={<Solution />} />
-          <Route path="/pricing" element={<PricingCard />} />
+          <Route path="/pricing" element={<Pricings />} />
+          <Route path="/getstarted" element={<GetStarted />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
+          <Route path="/demo" element={<Demo />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/resources/help-center" element={<HelpCenter />} />

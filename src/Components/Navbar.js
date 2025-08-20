@@ -69,22 +69,12 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-buttons">
-            <a
-              href="https://app.manypixels.co/signin"
-              className="button text-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link to="/signin" className="button text-button">
               SIGN IN
-            </a>
-            <a
-              href="https://app.manypixels.co/onboard"
-              className="button secondary-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            </Link>
+            <Link to="/getstarted" className="button secondary-button">
               Get Started
-            </a>
+            </Link>
             <Link
               to="/demo"
               className="button primary-button"

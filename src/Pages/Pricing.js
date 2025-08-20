@@ -3,10 +3,6 @@ import styles from "./PricingCard.module.css";
 import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
-import Plans from "../Components/Plans";
-import WorkGrid from "../Components/WorkGrid";
-import ReviewsSection from "../Components/Reviews";
-import FAQ from "../Components/FAQ";
 
 const PricingCard = () => {
   const [billingCycle, setBillingCycle] = useState("MONTHLY");
@@ -314,102 +310,95 @@ const PricingCard = () => {
 
   return (
     <>
-      <div className="container">
-        <div className={styles.pricing_container}>
-          <div className={styles.pricing_header}>
-            <h1>Pricing</h1>
-            <p>All-inclusive plans. No contract. Cancel anytime.</p>
-            <div className={styles.workBgWrapper}>
-              <img
-                src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab1f140c6821c5fa09_Group%204823.svg"
-                loading="lazy"
-                alt=""
-                className={styles.work_dec_1}
-              />
-              <img
-                src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884aba97aaae67c2a5ea2_Group%204822.svg"
-                loading="lazy"
-                alt=""
-                className={styles.work_dec_4}
-              />
-              <img
-                src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab33e01215443f94d9_Group%204824.svg"
-                loading="lazy"
-                alt=""
-                className={styles.work_dec_2}
-              />
-              <img
-                src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64789a0a94d2fcfd0eb19717_Frame%2048311.svg"
-                loading="lazy"
-                alt=""
-                className={styles.work_dec_3}
-              />
+      <div className={styles.pricing_container}>
+        <div className={styles.pricing_header}>
+          <h1>Pricing</h1>
+          <p>All-inclusive plans. No contract. Cancel anytime.</p>
+          <div className={styles.workBgWrapper}>
+            <img
+              src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab1f140c6821c5fa09_Group%204823.svg"
+              loading="lazy"
+              alt=""
+              className={styles.work_dec_1}
+            />
+            <img
+              src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884aba97aaae67c2a5ea2_Group%204822.svg"
+              loading="lazy"
+              alt=""
+              className={styles.work_dec_4}
+            />
+            <img
+              src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab33e01215443f94d9_Group%204824.svg"
+              loading="lazy"
+              alt=""
+              className={styles.work_dec_2}
+            />
+            <img
+              src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64789a0a94d2fcfd0eb19717_Frame%2048311.svg"
+              loading="lazy"
+              alt=""
+              className={styles.work_dec_3}
+            />
 
-              <img
-                src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab33593e56fc75b54e_Ellipse%20164.svg"
-                loading="lazy"
-                alt=""
-                className={styles.work_dec_5}
-              />
-            </div>
-            <div className={styles.billing_cycle_selector}>
-              <div className={styles.main_filter}>
-                <button
-                  className={`${styles.billing_toggle} ${
-                    billingCycle === "MONTHLY" ? styles.active : ""
-                  }`}
-                  onClick={() => setBillingCycle("MONTHLY")}
-                >
-                  MONTHLY
-                </button>
-                <button
-                  className={`${styles.billing_toggle} ${
-                    billingCycle === "QUARTERLY" ? styles.active : ""
-                  }`}
-                  onClick={() => setBillingCycle("QUARTERLY")}
-                >
-                  QUARTERLY
-                  <span className={styles.savings_badge}>
-                    {" "}
-                    <div class={styles.pricing_dec_6}></div>
-                  </span>
-                </button>
-                <button
-                  className={`${styles.billing_toggle} ${
-                    billingCycle === "YEARLY" ? styles.active : ""
-                  }`}
-                  onClick={() => setBillingCycle("YEARLY")}
-                >
-                  YEARLY
-                  <span className={styles.savings_badge}>
-                    {" "}
-                    <div class={styles.pricing_dec_5}></div>
-                    <img
-                      loading="lazy"
-                      src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6690f52c3a4851ffa8d01f42_Group%204953.webp"
-                      alt="The most popular logo."
-                      class={styles.pricing_featured_image}
-                    ></img>
-                  </span>
-                </button>
-              </div>
-            </div>
+            <img
+              src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/647884ab33593e56fc75b54e_Ellipse%20164.svg"
+              loading="lazy"
+              alt=""
+              className={styles.work_dec_5}
+            />
           </div>
-
-          <div className={styles.pricing_grid}>
-            {renderPricingCard("Advanced")}
-            {renderPricingCard("Business")}
-            {renderPricingCard("DesignatedDesigner")}
-
-            {renderPricingCard("DesignTeam")}
+          <div className={styles.billing_cycle_selector}>
+            <div className={styles.main_filter}>
+              <button
+                className={`${styles.billing_toggle} ${
+                  billingCycle === "MONTHLY" ? styles.active : ""
+                }`}
+                onClick={() => setBillingCycle("MONTHLY")}
+              >
+                MONTHLY
+              </button>
+              <button
+                className={`${styles.billing_toggle} ${
+                  billingCycle === "QUARTERLY" ? styles.active : ""
+                }`}
+                onClick={() => setBillingCycle("QUARTERLY")}
+              >
+                QUARTERLY
+                <span className={styles.savings_badge}>
+                  {" "}
+                  <div class={styles.pricing_dec_6}></div>
+                </span>
+              </button>
+              <button
+                className={`${styles.billing_toggle} ${
+                  billingCycle === "YEARLY" ? styles.active : ""
+                }`}
+                onClick={() => setBillingCycle("YEARLY")}
+              >
+                YEARLY
+                <span className={styles.savings_badge}>
+                  {" "}
+                  <div class={styles.pricing_dec_5}></div>
+                  <img
+                    loading="lazy"
+                    src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6690f52c3a4851ffa8d01f42_Group%204953.webp"
+                    alt="The most popular logo."
+                    class={styles.pricing_featured_image}
+                  ></img>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <Plans />
-        <WorkGrid />
+        <div className={styles.pricing_grid}>
+          {renderPricingCard("Advanced")}
+          {renderPricingCard("Business")}
+          {renderPricingCard("DesignatedDesigner")}
+
+          {renderPricingCard("DesignTeam")}
+        </div>
       </div>
-      <ReviewsSection />
-      <FAQ />
     </>
   );
 };

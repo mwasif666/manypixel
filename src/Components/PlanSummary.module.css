@@ -1,0 +1,108 @@
+.planCard {
+  border: none;
+  padding: 10px;
+  background-color: #f8f8f8;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 26px;
+  font-style: normal;
+  color: rgb(7, 18, 43);
+}
+
+.changeLink {
+  font-size: 13px;
+  color: #0099f6;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.planName {
+  color: #e60073;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.features li {
+  font-size: 14px;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 18px;
+}
+
+.features li::before {
+  content: "■";
+  font-size: 10px;
+  color: #f5c000;
+  position: absolute;
+  left: 0;
+  top: 3px;
+}
+
+.billingOptions {
+  margin-top: 15px;
+}
+
+.radioOption {
+  margin-bottom: 12px;
+}
+
+.optionLabel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+}
+
+.price {
+  font-weight: 600;
+}
+
+.save-yearly {
+  color: #e60073;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.save-biannually {
+  color: #0033cc;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.save-quarterly {
+  color: #f5c000;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.totalPrice {
+  color: #0099f6;
+  font-size: 20px;
+  font-weight: 700;
+}
