@@ -14,7 +14,7 @@ function generateTimeSlots(startTime = "5:30 PM", endTime = "10:15 PM") {
   const end = dayjs(endTime, "hh:mm A");
 
   while (current.isBefore(end) || current.isSame(end)) {
-    slots.push(current.format("h:mm A")); // short format: 5:30 PM
+    slots.push(current.format("h:mm A"));
     current = current.add(15, "minute");
   }
 
@@ -23,11 +23,14 @@ function generateTimeSlots(startTime = "5:30 PM", endTime = "10:15 PM") {
 
 export default function DateTime() {
   const [date, setDate] = React.useState(dayjs());
+  const [slot, setSlot] = React.useState("");
   const timeSlots = generateTimeSlots("5:30 PM", "10:15 PM");
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const handleSetSlot = (slot) => {
+    setSlot(slot);
+  };
   return (
     <div
       className=""
@@ -68,6 +71,9 @@ export default function DateTime() {
               openTo="day"
               value={date}
               onChange={(newValue) => setDate(newValue)}
+              slots={{
+                actionBar: () => null,
+              }}
             />
           </Box>
 
@@ -151,6 +157,7 @@ export default function DateTime() {
                     padding: "8px 0px",
                     color: "#33475b",
                   }}
+                  onClick={() => handleSetSlot(slot)}
                 >
                   {slot}
                 </Button>
