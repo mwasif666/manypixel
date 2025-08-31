@@ -6,7 +6,7 @@ import { Navigation, Thumbs } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import styles from "./OurWork.module.css";
+import styles from "../style/OurWork.module.css";
 import CtaSection from "../Components/CtaSection";
 
 const OurWork = () => {

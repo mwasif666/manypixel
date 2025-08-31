@@ -5,7 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import styles from "./Demo.module.css";
+import styles from "../style/Demo.module.css";
 
 // Function to generate custom time slots (12h with AM/PM)
 function generateTimeSlots(startTime = "5:30 PM", endTime = "10:15 PM") {
@@ -137,7 +137,7 @@ export default function DateTime() {
                 textAlign: "center",
               }}
             >
-              {timeSlots.map((slot) => (
+              {timeSlots.map((slot, index) => (
                 <Button
                   key={slot}
                   variant="outlined"
@@ -149,7 +149,7 @@ export default function DateTime() {
                     borderRadius: "5px",
                     border: "1px solid #dfe3eb",
                     padding: "8px 0px",
-                    color: "#33475b",
+                    color: "#33475b", 
                   }}
                 >
                   {slot}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./PricingCard.module.css";
+import styles from "../style/PricingCard.module.css";
 import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
