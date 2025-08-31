@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FooterSection.module.css";
+import styles from "../style/FooterSection.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 const FooterSection = () => {

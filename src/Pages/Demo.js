@@ -1,6 +1,6 @@
 import React from "react";
 import DateTime from "./Data&Time";
-import styles from "./Demo.module.css";
+import styles from "../style/Demo.module.css";
 
 const Demo = () => {
   return (
