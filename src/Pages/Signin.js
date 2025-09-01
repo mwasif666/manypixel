@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "../style/Signin.module.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +33,6 @@ const Signin = () => {
       [name]: type === "checkbox" ? checked : value,
     });
 
-    // Validate on change if field has been touched
     if (touched[name]) {
       validateField(name, type === "checkbox" ? checked : value);
     }
@@ -74,10 +75,9 @@ const Signin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
-    // Validate all fields
     Object.keys(formData).forEach((name) => {
       if (name !== "remember") {
         validateField(name, formData[name]);
@@ -92,8 +92,16 @@ const Signin = () => {
       formData.password;
 
     if (isValid) {
-      console.log("Form submitted:", formData);
-      // Here you would typically make an API call
+      
+      try {
+        const response = await axios.post("https://manypixel.innovationpixel.com/login", {formData});
+        if(response){
+              
+        }
+      } catch (error) {
+        toast.error("Failed to login");
+        console.error(error);
+      }
     }
   };
 
