@@ -1,6 +1,5 @@
-
-import { useState, useEffect  } from "react";
-import { useParams, Link} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./BlogDetail.module.css";
 import axios from "axios";
@@ -66,7 +65,6 @@ const BlogDetail = () => {
     return <div className={styles.notFound}>Blog post not found</div>;
   }
 
-  
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
@@ -84,7 +82,9 @@ const BlogDetail = () => {
 
         <div className={styles.blogHeader}>
           <div className={styles.blogMeta}>
-            <span className={styles.blogCategory}>{blog.category.toLocaleUpperCase()}</span>
+            <span className={styles.blogCategory}>
+              {blog.category.toLocaleUpperCase()}
+            </span>
             <span className={styles.blogDate}>{blog.date}</span>
             <span className={styles.readTime}>{blog.readTime} read</span>
           </div>
@@ -92,12 +92,16 @@ const BlogDetail = () => {
         </div>
 
         <div className={styles.blogImageContainer}>
-          <img src={blog.image} alt={blog.title} className={styles.blogImage} />
+          <img
+            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog.encoded_name}`}
+            alt={blog.image_alt_text}
+            className={styles.blogImage}
+          />
         </div>
 
         <div
           className={styles.blogContent}
-          dangerouslySetInnerHTML={{ __html: blog.longDescription }}
+          dangerouslySetInnerHTML={{ __html: blog.long_description }}
         />
 
         <div className={styles.blogFooter}>

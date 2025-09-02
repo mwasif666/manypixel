@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./StepperForm.module.css";
 import { Form, Button, Container } from "react-bootstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const StepperForm = () => {
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
   const [step, setStep] = useState(2); // Start directly from Step 2
   const [formData, setFormData] = useState({
-    plan: "",
+    plan: 1,
     firstName: "",
     lastName: "",
     companyName: "",
@@ -25,12 +30,73 @@ const StepperForm = () => {
     { number: 5, title: "SUCCESS" },
   ];
 
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "firstName":
+        if (!value) error = "First name is required";
+        break;
+      case "lastName":
+        if (!value) error = "Last name is required";
+        break;
+      case "companyName":
+        if (!value) error = "Company name is required";
+        break;
+      case "website":
+        if (!value) {
+          error = "Website is required";
+        } else if (!/^https?:\/\/.+\..+/.test(value)) {
+          error = "Enter a valid URL (e.g. https://example.com)";
+        }
+        break;
+      case "jobTitle":
+        if (!value) error = "Job title is required";
+        break;
+      case "email":
+        if (!value) {
+          error = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Enter a valid email address";
+        }
+        break;
+      case "password":
+        if (!value) {
+          error = "Password is required";
+        } else if (value.length < 6) {
+          error = "Password must be at least 6 characters";
+        }
+        break;
+      case "confirmPassword":
+        if (!value) {
+          error = "Confirm password is required";
+        } else if (value !== formData.password) {
+          error = "Passwords do not match";
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    if (touched[name]) {
+      validateField(name, value);
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    validateField(name, value);
   };
 
   const nextStep = () => {
@@ -44,15 +110,55 @@ const StepperForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (step === steps.length) {
-      console.log("Form submitted:", formData);
-      alert("Registration successful!");
+  const makeError = (error, toast) => {
+    const errorBag = error?.response?.data?.errors;
+
+    if (errorBag && typeof errorBag === "object") {
+      Object.keys(errorBag).forEach((key) => {
+        (Array.isArray(errorBag[key])
+          ? errorBag[key]
+          : [errorBag[key]]
+        ).forEach((msg) => toast.error(msg));
+      });
     } else {
-      nextStep();
+      toast.error("Internal Server Error, Please try again");
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    Object.keys(formData).forEach((name) => {
+      validateField(name, formData[name]);
+      setTouched((prev) => ({ ...prev, [name]: true }));
+    });
+
+    const hasErrors = Object.values(errors).some((err) => err);
+    if (hasErrors) return;
+    try {
+      const data = new FormData();
+      data.append("name", formData.firstName);
+      data.append("last_name", formData.lastName);
+      data.append("company", formData.companyName);
+      data.append("website", formData.website);
+      data.append("job_title", formData.jobTitle);
+      data.append("email", formData.email);
+      data.append("password", formData.password);
+      data.append("password_confirmation", formData.confirmPassword);
+      data.append("package_id", formData.plan);
+
+      const res = await axios.post(
+        "https://manypixel.innovationpixel.com/onboard",
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      console.log("Form submitted:", res.data);
+      nextStep();
+    } catch (error) {
+      makeError(error, toast);
+    }
+  };
+
   useEffect(() => {
     // Initialize Bootstrap tooltips
     const bootstrap = require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -63,6 +169,7 @@ const StepperForm = () => {
       (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
     );
   }, []);
+
   const renderStep = () => {
     switch (step) {
       case 2:
@@ -79,12 +186,18 @@ const StepperForm = () => {
                   <input
                     type="text"
                     name="firstName"
-                    className="form-control"
+                    className={`form-control ${
+                      touched.firstName && errors.firstName ? "is-invalid" : ""
+                    }`}
                     value={formData.firstName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     placeholder="Enter your first name"
                     required
                   />
+                  {touched.firstName && errors.firstName && (
+                    <div className="invalid-feedback">{errors.firstName}</div>
+                  )}
                 </div>
 
                 {/* Last Name */}
@@ -95,12 +208,18 @@ const StepperForm = () => {
                   <input
                     type="text"
                     name="lastName"
-                    className="form-control"
+                    className={`form-control ${
+                      touched.lastName && errors.lastName ? "is-invalid" : ""
+                    }`}
                     value={formData.lastName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     placeholder="Enter your last name"
                     required
                   />
+                  {touched.lastName && errors.lastName && (
+                    <div className="invalid-feedback">{errors.lastName}</div>
+                  )}
                 </div>
               </div>
 
@@ -135,12 +254,20 @@ const StepperForm = () => {
                   <input
                     type="text"
                     name="companyName"
-                    className="form-control"
-                    value={formData.companyName}
+                    className={`form-control ${
+                      touched.companyName && errors.companyName
+                        ? "is-invalid"
+                        : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.companyName}
                     placeholder="Enter your company name"
                     required
                   />
+                  {touched.companyName && errors.companyName && (
+                    <div className="invalid-feedback">{errors.companyName}</div>
+                  )}
                 </div>
 
                 {/* Company Website */}
@@ -151,12 +278,18 @@ const StepperForm = () => {
                   <input
                     type="url"
                     name="website"
-                    className="form-control"
-                    value={formData.website}
+                    className={`form-control ${
+                      touched.website && errors.website ? "is-invalid" : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.website}
                     placeholder="www.example.com"
                     required
                   />
+                  {touched.website && errors.website && (
+                    <div className="invalid-feedback">{errors.website}</div>
+                  )}
                 </div>
               </div>
 
@@ -169,12 +302,18 @@ const StepperForm = () => {
                   <input
                     type="text"
                     name="jobTitle"
-                    className="form-control"
-                    value={formData.jobTitle}
+                    className={`form-control ${
+                      touched.jobTitle && errors.jobTitle ? "is-invalid" : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.jobTitle}
                     placeholder="Enter your role"
                     required
                   />
+                  {touched.jobTitle && errors.jobTitle && (
+                    <div className="invalid-feedback">{errors.jobTitle}</div>
+                  )}
                 </div>
 
                 {/* Email */}
@@ -185,12 +324,18 @@ const StepperForm = () => {
                   <input
                     type="email"
                     name="email"
-                    className="form-control"
-                    value={formData.email}
+                    className={`form-control ${
+                      touched.email && errors.email ? "is-invalid" : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.email}
                     placeholder="Enter your email"
                     required
                   />
+                  {touched.email && errors.email && (
+                    <div className="invalid-feedback">{errors.email}</div>
+                  )}
                 </div>
               </div>
 
@@ -203,12 +348,18 @@ const StepperForm = () => {
                   <input
                     type="password"
                     name="password"
-                    className="form-control"
-                    value={formData.password}
+                    className={`form-control ${
+                      touched.password && errors.password ? "is-invalid" : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.password}
                     placeholder="Create your password"
                     required
                   />
+                  {touched.password && errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
                 </div>
 
                 {/* Confirm Password */}
@@ -219,12 +370,22 @@ const StepperForm = () => {
                   <input
                     type="password"
                     name="confirmPassword"
-                    className="form-control"
-                    value={formData.confirmPassword}
+                    className={`form-control ${
+                      touched.confirmPassword && errors.confirmPassword
+                        ? "is-invalid"
+                        : ""
+                    }`}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formData.confirmPassword}
                     placeholder="Confirm your password"
                     required
                   />
+                  {touched.confirmPassword && errors.confirmPassword && (
+                    <div className="invalid-feedback">
+                      {errors.confirmPassword}
+                    </div>
+                  )}
                 </div>
               </div>
             </form>
@@ -331,7 +492,7 @@ const StepperForm = () => {
             ) : (
               <Button
                 variant="success"
-                onClick={() => setStep(2)} // Restart directly from Step 2
+                onClick={() => setStep(2)}
                 className={styles.restartButton}
               >
                 Start New Registration

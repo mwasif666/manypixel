@@ -41,7 +41,8 @@ const Blog = () => {
   }
 
   const featuredBlog = blogs[0]; 
-  const otherBlogs = blogs.slice(1); 
+  const otherBlogs = blogs
+
   return (
     <div className={styles.blogHome}>
       <div className={`container-lg ${styles.paddingGlobal}`}>
@@ -62,17 +63,17 @@ const Blog = () => {
               <div className={styles.blogList}>
                 <div className={styles.blogItem}>
                   <Link
-                    to={`/blog/${featuredBlog.id}`}
+                    to={`/blog-details/${featuredBlog.slug}`}
                     className={styles.blogHomeLink}
                   >
                     <div className={`row ${styles.twelveColGrid}`}>
                       <div className={`col-md-6 ${styles.blogHomeItemHover}`}>
-                        <img
-                          src={featuredBlog.image}
-                          loading="lazy"
-                          alt={featuredBlog.title}
-                          className={styles.blogCatThumbImage}
-                        />
+                          <img
+                            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${featuredBlog.encoded_name}`}
+                            loading="lazy"
+                            alt={featuredBlog.image_alt_text}
+                            className={styles.blogCatThumbImage}
+                          />
                         <div className={styles.blogHomeDecText}>READ BLOG</div>
                         <div className={styles.blogHomeGrad}></div>
                       </div>
@@ -89,7 +90,7 @@ const Blog = () => {
                           <div className={styles.tag}>
                             {featuredBlog.category}
                           </div>
-                          <div className={styles.blogDate}>
+                          {/* <div className={styles.blogDate}>
                             <div className={styles.textSizeTiny}>
                               {featuredBlog.date}
                             </div>
@@ -103,7 +104,7 @@ const Blog = () => {
                               </div>
                               <div className={styles.textSizeTiny}>min</div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -119,14 +120,14 @@ const Blog = () => {
                 {otherBlogs.map((blog) => (
                   <div key={blog.id} className="col-md-4 mb-4">
                     <Link
-                      to={`/blog/${blog.id}`}
+                      to={`/blog-details/${blog.slug}`}
                       className={styles.blogHomeItem}
                     >
                       <div className={styles.blogHomeItemHover}>
                         <img
-                          src={blog.image}
+                          src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog.encoded_name}`}
                           loading="lazy"
-                          alt={blog.title}
+                          alt={blog.image_alt_text}
                           className={styles.blogHomeItemThumb}
                         />
                         <div className={styles.blogHomeDecText}>READ BLOG</div>
@@ -135,7 +136,7 @@ const Blog = () => {
                       <h2 className={styles.headingStyleH5}>{blog.title}</h2>
                       <div className={styles.blogBottom}>
                         <div className={styles.tag}>{blog.category}</div>
-                        <div className={styles.blogDate}>
+                        {/* <div className={styles.blogDate}>
                           <div className={styles.readtimeWrapper}>
                             <div className={styles.textSizeTiny}>
                               {blog.readTime
@@ -144,7 +145,7 @@ const Blog = () => {
                             </div>
                             <div className={styles.textSizeTiny}>min</div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </Link>
                   </div>

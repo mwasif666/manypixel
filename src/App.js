@@ -44,7 +44,7 @@ function App() {
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/blog-details/:slug" element={<BlogDetail />} />
           <Route path="/resources/help-center" element={<HelpCenter />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

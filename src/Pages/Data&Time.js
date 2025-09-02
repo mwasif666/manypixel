@@ -28,6 +28,20 @@ function generateTimeSlots(startTime = "5:30 PM", endTime = "10:15 PM") {
   return slots;
 }
 
+function formatTime12to24(timeStr) {
+  const [time, modifier] = timeStr.split(" ");
+
+  let [hours, minutes] = time.split(":").map(Number);
+
+  if (modifier === "PM" && hours !== 12) {
+    hours += 12;
+  }
+  if (modifier === "AM" && hours === 12) {
+    hours = 0;
+  }
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
+}
+
 export default function DateTime() {
   const [date, setDate] = React.useState(dayjs());
   const [slot, setSlot] = React.useState("");
@@ -92,7 +106,7 @@ export default function DateTime() {
     formData.append("company", companyName);
     formData.append("website", websiteUrl);
     formData.append("date", formatDate(date["$d"]));
-    formData.append("time", slot);
+    formData.append("time", formatTime12to24(slot));
 
     try {
       const response = await axios.post(

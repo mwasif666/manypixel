@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./PlanSummary.module.css";
 import { Card, Form, Modal, Button } from "react-bootstrap";
 import PricingCard from "../Pages/Pricing";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const PlanSummary = () => {
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [billing, setBilling] = useState("yearly");
   const [showModal, setShowModal] = useState(false);
 
@@ -30,6 +34,25 @@ const PlanSummary = () => {
   };
 
   const selectedPlan = plans[billing];
+
+  const getPackageData = async() =>{
+    try {
+      setLoading(true);
+      const response = await axios.get(`https://manypixel.innovationpixel.com/packages_api`);
+      if(response.data.data){
+        setPackages(response.data.data);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to get package!")
+    }finally{
+      setLoading(false);
+    }
+  }
+
+  useEffect(()=>{
+    getPackageData();
+  },[])
 
   return (
     <>
@@ -100,7 +123,7 @@ const PlanSummary = () => {
           <Modal.Title>Select Your Plan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PricingCard />
+          <PricingCard loading={loading} packages={packages}/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>

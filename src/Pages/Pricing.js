@@ -4,18 +4,19 @@ import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
 
-const PricingCard = () => {
+const PricingCard = ({loading, packages}) => {
+  console.log(packages);
+  
   const [billingCycle, setBillingCycle] = useState("MONTHLY");
 
   useEffect(() => {
-    // Initialize Bootstrap tooltips
     const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
     tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new Tooltip(tooltipTriggerEl);
     });
-  }, [billingCycle]); // Re-initialize when billing cycle changes
+  }, [billingCycle]);
 
   const pricingPlans = {
     MONTHLY: {
@@ -60,43 +61,39 @@ const PricingCard = () => {
 
   const webDesignItems = ["Websites", "Landing Pages"];
 
-  const renderPricingCard = (plan) => {
-    const price = pricingPlans[billingCycle][plan];
-    const monthlyPrice = pricingPlans["MONTHLY"][plan];
-    const savings =
-      billingCycle === "QUARTERLY"
-        ? "Save 10%"
-        : billingCycle === "YEARLY"
-        ? "Save 20%"
-        : "";
+  const renderPricingCard = (item) => {
+    // const price = pricingPlans[billingCycle][plan];
+    // const monthlyPrice = pricingPlans["MONTHLY"][plan];
+    // const savings =
+    //   billingCycle === "QUARTERLY"
+    //     ? "Save 10%"
+    //     : billingCycle === "YEARLY"
+    //     ? "Save 20%"
+    //     : "";
 
     return (
-      <div key={plan} className={`${styles.pricing_item} card`}>
+      <div key={item.id} className={`${styles.pricing_item} card`}>
         <div className={styles.pricing_top}>
           <h2 className={styles.heading_style_h4}>
-            {plan
+            {item.name
               .replace(/([A-Z])/g, " $1")
               .replace(/^./, (str) => str.toUpperCase())}
           </h2>
           <div className={`${styles.text_size_small} ${styles.pricing_size}`}>
-            {plan === "Advanced" && "Create all of your everyday designs."}
-            {plan === "Business" && "Get double the output everyday."}
-            {plan === "DesignatedDesigner" &&
-              "Collaborate in real time with your designer."}
-            {plan === "DesignTeam" && "Get more done with your design team."}
+            {item.tagline}
           </div>
           <div
             className={`${styles.heading_style_h4} ${styles.text_color_primary}`}
           >
-            <span className={styles.heading_style_h5}>USD</span> ${price}
+            <span className={styles.heading_style_h5}>USD</span> ${item.mon_dol}
             {billingCycle !== "MONTHLY" && (
-              <span className={styles.billing_savings}>/mo {savings}</span>
+              <span className={styles.billing_savings}>/mo {item.savings}</span>
             )}
             {billingCycle === "MONTHLY" && <span>/mo</span>}
           </div>
           {billingCycle !== "MONTHLY" && (
             <div className={styles.original_price}>
-              ${monthlyPrice}/mo originally
+              ${item.org_mon_dol}/mo originally
             </div>
           )}
           <div className={styles.divider}></div>
@@ -108,24 +105,13 @@ const PricingCard = () => {
                 <div className={styles.pricing_list_item}>
                   <FaCheck className={styles.pricing_icon2} />
                   <div className={styles.text_size_small}>
-                    {plan === "Advanced" && "1 Daily Output"}
-                    {plan === "Business" && "2 Daily Output"}
-                    {plan === "DesignatedDesigner" && "Designated Designer"}
-                    {plan === "DesignTeam" && "2 Designated Designers"}
+                    {item.features[0].name}
                   </div>
                   <div
                     className={styles.tooltip_icon}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    title={
-                      plan === "Advanced"
-                        ? "1 designer is assigned to your account and work on your project(s) every business day."
-                        : plan === "Business"
-                        ? "2 designers are assigned to your account and work on your projects every business day."
-                        : plan === "DesignatedDesigner"
-                        ? "A dedicated designer works exclusively on your projects."
-                        : "A team of 2 dedicated designers works on your projects."
-                    }
+                    title={item.tagline}
                   >
                     <BsQuestionSquareFill className={styles.pricing_icon3} />
                   </div>
@@ -134,15 +120,12 @@ const PricingCard = () => {
                 <div className={styles.pricing_list_item}>
                   <FaCheck className={styles.pricing_icon2} />
                   <div className={styles.text_size_small}>
-                    {plan === "Advanced" && "1-2 Day Delivery"}
-                    {plan === "Business" && "Next-Day Delivery"}
-                    {plan === "DesignatedDesigner" && "Same-Day Delivery"}
-                    {plan === "DesignTeam" && "Same-Day Delivery"}
+                    {item.features[1].name}
                   </div>
                 </div>
 
                 <div className={styles.pricing_list_item}>
-                  {plan === "Advanced" || plan === "Business" ? (
+                  {item.name === "Advanced" || item.name === "Business" ? (
                     <FaLock
                       className={`${styles.pricing_icon} ${styles.disabled_icon}`}
                     />
@@ -152,7 +135,7 @@ const PricingCard = () => {
 
                   <div
                     className={`${styles.text_size_small} ${
-                      plan === "Advanced" || plan === "Business"
+                      item.name === "Advanced" || item.name === "Business"
                         ? styles.dis
                         : ""
                     }`}
@@ -174,7 +157,7 @@ const PricingCard = () => {
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     data-bs-placement="right"
-                    title={graphicDesignItems.join("<br/>")}
+                    title={item.design_services.map(item=>item.name).join("<br/>")}
                   >
                     <BsQuestionSquareFill className={styles.pricing_icon3} />
                   </div>
@@ -188,14 +171,14 @@ const PricingCard = () => {
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     data-bs-placement="right"
-                    title={webDesignItems.join("<br/>")}
+                    title={item.design_services.map(item=>item.name).join("<br/>")}
                   >
                     <BsQuestionSquareFill className={styles.pricing_icon3} />
                   </div>
                 </div>
 
                 <div className={styles.pricing_list_item}>
-                  {plan === "Advanced" ? (
+                  {item.name === "Advanced" ? (
                     <FaLock
                       className={`${styles.pricing_icon} ${styles.disabled_icon}`}
                     />
@@ -205,7 +188,7 @@ const PricingCard = () => {
 
                   <div
                     className={`${styles.text_size_small} ${
-                      plan === "Advanced" ? styles.dis : ""
+                      item.name === "Advanced" ? styles.dis : ""
                     }`}
                   >
                     Illustrations
@@ -213,7 +196,7 @@ const PricingCard = () => {
                 </div>
 
                 <div className={styles.pricing_list_item}>
-                  {plan === "Advanced" ? (
+                  {item.name === "Advanced" ? (
                     <FaLock
                       className={`${styles.pricing_icon} ${styles.disabled_icon}`}
                     />
@@ -223,7 +206,7 @@ const PricingCard = () => {
 
                   <div
                     className={`${styles.text_size_small} ${
-                      plan === "Advanced" ? styles.dis : ""
+                      item.name === "Advanced" ? styles.dis : ""
                     }`}
                   >
                     Motion Graphics
@@ -231,7 +214,7 @@ const PricingCard = () => {
                 </div>
 
                 <div className={styles.pricing_list_item}>
-                  {plan === "Advanced" ? (
+                  {item.name === "Advanced" ? (
                     <FaLock
                       className={`${styles.pricing_icon} ${styles.disabled_icon}`}
                     />
@@ -241,7 +224,7 @@ const PricingCard = () => {
 
                   <div
                     className={`${styles.text_size_small} ${
-                      plan === "Advanced" ? styles.dis : ""
+                      item.name === "Advanced" ? styles.dis : ""
                     }`}
                   >
                     Video Editing
@@ -291,15 +274,15 @@ const PricingCard = () => {
 
           <a
             href={
-              plan === "DesignatedDesigner" || plan === "DesignTeam"
+              item.name === "Designated Designer" || item.plan === "Design Team"
                 ? "#"
-                : `https://app.manypixels.co/onboard?plan=${plan}`
+                : `https://app.manypixels.co/onboard?plan=${item.plan}`
             }
             target="_blank"
             className={`${styles.button} ${styles.width} ${styles.auto_top}`}
             rel="noopener noreferrer"
           >
-            {plan === "DesignatedDesigner" || plan === "DesignTeam"
+            {item.plan === "Designated Designer" || item.plan === "Design Team"
               ? "BOOK A CALL"
               : "GET STARTED"}
           </a>
@@ -307,6 +290,10 @@ const PricingCard = () => {
       </div>
     );
   };
+
+   if(loading){
+      return <div>Loading...</div>
+    }
 
   return (
     <>
@@ -357,11 +344,9 @@ const PricingCard = () => {
         </div>
 
         <div className={styles.pricing_grid}>
-          {renderPricingCard("Advanced")}
-          {renderPricingCard("Business")}
-          {renderPricingCard("DesignatedDesigner")}
-
-          {renderPricingCard("DesignTeam")}
+          {packages.map((item)=>(
+            renderPricingCard(item)
+          ))}
         </div>
       </div>
     </>
