@@ -73,6 +73,14 @@
   font-weight: 600;
 }
 
+.save-monthly {
+  color: #0099f6;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+
 .save-yearly {
   color: #e60073;
   font-weight: 600;

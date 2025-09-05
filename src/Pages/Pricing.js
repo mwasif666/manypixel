@@ -4,9 +4,7 @@ import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
 
-const PricingCard = ({ loading, packages }) => {
-  console.log(packages);
-
+const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal}) => {
   const [billingCycle, setBillingCycle] = useState("MONTHLY");
 
   useEffect(() => {
@@ -18,6 +16,10 @@ const PricingCard = ({ loading, packages }) => {
     });
   }, [billingCycle]);
 
+  const safeParseInt = (val) => {
+    const num = parseInt(val, 10);
+    return isNaN(num) ? 0 : num;
+  };
 
   const renderPricingCard = (item) => {
     const currency = {
@@ -25,35 +27,9 @@ const PricingCard = ({ loading, packages }) => {
       aed: 1,
     };
 
-    const currencyCheck = (currencyVal = "") => {
-      // Todo: return currency.usd === currenyy ?  true : false;
+    const currencyCheck = () => {
+      // default to USD
       return currency.usd === 0 ? true : false;
-    };
-
-    const discountedAmount = (item) => {
-      switch (billingCycle) {
-        case "MONTHLY":
-          return calculateDiscount(
-            parseInt(item.mon_dol),
-            parseInt(item.mon_dol_discount),
-            parseInt(item.mon_aed),
-            parseInt(item.mon_aed_discount)
-          );
-        case "QUARTERLY":
-          return calculateDiscount(
-            parseInt(item.quar_dol),
-            parseInt(item.quar_dol_discount),
-            parseInt(item.quar_aed),
-            parseInt(item.quar_aed_discount)
-          );
-        case "YEARLY":
-          return calculateDiscount(
-            parseInt(item.y_dol),
-            parseInt(item.y_dol_discount),
-            parseInt(item.y_aed),
-            parseInt(item.y_aed_discount)
-          );
-      }
     };
 
     const calculateDiscount = (
@@ -62,46 +38,43 @@ const PricingCard = ({ loading, packages }) => {
       aedAmount,
       aedPercentage
     ) => {
-      if (currency.usd == 0) {
-        return dollAmount - (dollAmount * dollPercentage) / 100;
-      } else if (currency.aed === 1) {
-        return aedAmount - (aedAmount * aedPercentage) / 100;
+      const dAmt = safeParseInt(dollAmount);
+      const dPct = safeParseInt(dollPercentage);
+      const aAmt = safeParseInt(aedAmount);
+      const aPct = safeParseInt(aedPercentage);
+
+      if (currencyCheck()) {
+        return dAmt - (dAmt * dPct) / 100;
+      } else {
+        return aAmt - (aAmt * aPct) / 100;
       }
     };
 
-    const isDiscountAvailable = (item) => {
+    const discountedAmount = (item) => {
       switch (billingCycle) {
         case "MONTHLY":
-          if (currency.usd === 0 && checkValidity(item.mon_dol_discount)) {
-            return true;
-          } else if (
-            currency.usd === 0 &&
-            checkValidity(item.mon_aed_discount)
-          ) {
-            return true;
-          }
-          return false;
+          return calculateDiscount(
+            item.mon_dol,
+            item.mon_dol_discount,
+            item.mon_aed,
+            item.mon_aed_discount
+          );
         case "QUARTERLY":
-          if (currency.usd === 0 && checkValidity(item.quar_dol_discount)) {
-            return true;
-          } else if (
-            currency.usd === 0 &&
-            checkValidity(item.quar_aed_discount)
-          ) {
-            return true;
-          }
-          return false;
-
+          return calculateDiscount(
+            item.quar_dol,
+            item.quar_dol_discount,
+            item.quar_aed,
+            item.quar_aed_discount
+          );
         case "YEARLY":
-          if (currency.usd === 0 && checkValidity(item.y_dol_discount)) {
-            return true;
-          } else if (currency.usd === 0 && checkValidity(item.y_aed_discount)) {
-            return true;
-          }
-          return false;
-
+          return calculateDiscount(
+            item.y_dol,
+            item.y_dol_discount,
+            item.y_aed,
+            item.y_aed_discount
+          );
         default:
-          return false;
+          return 0;
       }
     };
 
@@ -109,37 +82,73 @@ const PricingCard = ({ loading, packages }) => {
       return val !== undefined && val !== "" && val !== null;
     };
 
+    const isDiscountAvailable = (item) => {
+      switch (billingCycle) {
+        case "MONTHLY":
+          return currencyCheck()
+            ? checkValidity(item.mon_dol_discount)
+            : checkValidity(item.mon_aed_discount);
+        case "QUARTERLY":
+          return currencyCheck()
+            ? checkValidity(item.quar_dol_discount)
+            : checkValidity(item.quar_aed_discount);
+        case "YEARLY":
+          return currencyCheck()
+            ? checkValidity(item.y_dol_discount)
+            : checkValidity(item.y_aed_discount);
+        default:
+          return false;
+      }
+    };
+
     const getActuallAmount = (item) => {
       switch (billingCycle) {
         case "MONTHLY":
           return currencyCheck()
-            ? parseInt(item.mon_dol)
-            : parseInt(item.mon_aed);
+            ? safeParseInt(item.mon_dol)
+            : safeParseInt(item.mon_aed);
         case "QUARTERLY":
           return currencyCheck()
-            ? parseInt(item.quar_dol)
-            : parseInt(item.quar_aed);
+            ? safeParseInt(item.quar_dol)
+            : safeParseInt(item.quar_aed);
         case "YEARLY":
-          return currencyCheck() ? parseInt(item.y_dol) : parseInt(item.y_aed);
+          return currencyCheck()
+            ? safeParseInt(item.y_dol)
+            : safeParseInt(item.y_aed);
+        default:
+          return 0;
       }
     };
 
     const getSavingAmount = (item) => {
-      let discount = 0;
-      discount = calculateDiscount(
-        parseInt(item.mon_dol),
-        parseInt(item.mon_dol_discount),
-        parseInt(item.mon_aed),
-        parseInt(item.mon_aed_discount)
-      );
+      let discount = discountedAmount(item);
       switch (billingCycle) {
         case "MONTHLY":
-          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*1 : (item.mon_aed - discount)*1);
+          return Math.floor(
+            currencyCheck()
+              ? safeParseInt(item.mon_dol) - discount
+              : safeParseInt(item.mon_aed) - discount
+          );
         case "QUARTERLY":
-          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*3 : (item.mon_aed - discount)*3);
+          return Math.floor(
+            currencyCheck()
+              ? (safeParseInt(item.quar_dol) - discount) * 3
+              : (safeParseInt(item.quar_aed) - discount) * 3
+          );
         case "YEARLY":
-          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*12 : (item.mon_aed - discount)*12);
+          return Math.floor(
+            currencyCheck()
+              ? (safeParseInt(item.y_dol) - discount) * 12
+              : (safeParseInt(item.y_aed) - discount) * 12
+          );
+        default:
+          return 0;
       }
+    };
+
+    const setPackage = (item) => {
+      setSelectedPackage(item);
+      setShowModal(false);
     };
 
     return (
@@ -164,7 +173,10 @@ const PricingCard = ({ loading, packages }) => {
               ? discountedAmount(item)
               : getActuallAmount(item)}
             {isDiscountAvailable(item) && (
-              <span className={styles.billing_savings}>/mo {getSavingAmount(item)}{currencyCheck() ? '$': 'aed'}</span>
+              <span className={styles.billing_savings}>
+                /mo {getSavingAmount(item)}
+                {currencyCheck() ? "$" : "aed"}
+              </span>
             )}
             {!isDiscountAvailable(item) && <span>/mo</span>}
           </div>
@@ -356,20 +368,12 @@ const PricingCard = ({ loading, packages }) => {
             </div>
           </div>
 
-          <a
-            href={
-              item.name === "Designated Designer" || item.plan === "Design Team"
-                ? "#"
-                : `https://app.manypixels.co/onboard?plan=${item.plan}`
-            }
-            target="_blank"
+          <button
             className={`${styles.button} ${styles.width} ${styles.auto_top}`}
-            rel="noopener noreferrer"
+            onClick={()=>setPackage(item)}
           >
-            {item.plan === "Designated Designer" || item.plan === "Design Team"
-              ? "BOOK A CALL"
-              : "GET STARTED"}
-          </a>
+            "GET STARTED
+          </button>
         </div>
       </div>
     );

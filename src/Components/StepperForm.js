@@ -4,7 +4,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const StepperForm = () => {
+const StepperForm = ({selectedPlanData}) => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
@@ -144,7 +144,7 @@ const StepperForm = () => {
       data.append("email", formData.email);
       data.append("password", formData.password);
       data.append("password_confirmation", formData.confirmPassword);
-      data.append("package_id", formData.plan);
+      data.append("package_id", selectedPlanData.package.id || 0);
 
       const res = await axios.post(
         "https://manypixel.innovationpixel.com/onboard",

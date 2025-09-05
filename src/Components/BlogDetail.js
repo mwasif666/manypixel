@@ -59,6 +59,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     getBlogDetail();
+    //  eslint-disable-next-line
   }, [slug]);
 
   if (!blog) {
