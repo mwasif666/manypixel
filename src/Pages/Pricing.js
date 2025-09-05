@@ -4,9 +4,9 @@ import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
 
-const PricingCard = ({loading, packages}) => {
+const PricingCard = ({ loading, packages }) => {
   console.log(packages);
-  
+
   const [billingCycle, setBillingCycle] = useState("MONTHLY");
 
   useEffect(() => {
@@ -18,58 +18,129 @@ const PricingCard = ({loading, packages}) => {
     });
   }, [billingCycle]);
 
-  const pricingPlans = {
-    MONTHLY: {
-      Advanced: 599,
-      Business: 999,
-      DesignatedDesigner: 1299,
-      DesignTeam: 2399,
-    },
-    QUARTERLY: {
-      Advanced: 539, // 10% off
-      Business: 899, // 10% off
-      DesignatedDesigner: 1169, // 10% off
-      DesignTeam: 2159, // 10% off
-    },
-    YEARLY: {
-      Advanced: 479, // 20% off
-      Business: 799, // 20% off
-      DesignatedDesigner: 1039, // 20% off
-      DesignTeam: 1919, // 20% off
-    },
-  };
-
-  const graphicDesignItems = [
-    "Logos",
-    "Business Cards",
-    "Brand Guides",
-    "Posters, Billboards, Banners",
-    "Stationery Design",
-    "Brochures and Booklets",
-    "Presentations",
-    "Flyers",
-    "Social Media Graphics",
-    "Business Reports",
-    "Digitals Ads",
-    "Infographics",
-    "Email Graphics",
-    "Icons",
-    "E-Books",
-    "GIFs",
-    "Blog Graphics",
-  ];
-
-  const webDesignItems = ["Websites", "Landing Pages"];
 
   const renderPricingCard = (item) => {
-    // const price = pricingPlans[billingCycle][plan];
-    // const monthlyPrice = pricingPlans["MONTHLY"][plan];
-    // const savings =
-    //   billingCycle === "QUARTERLY"
-    //     ? "Save 10%"
-    //     : billingCycle === "YEARLY"
-    //     ? "Save 20%"
-    //     : "";
+    const currency = {
+      usd: 0,
+      aed: 1,
+    };
+
+    const currencyCheck = (currencyVal = "") => {
+      // Todo: return currency.usd === currenyy ?  true : false;
+      return currency.usd === 0 ? true : false;
+    };
+
+    const discountedAmount = (item) => {
+      switch (billingCycle) {
+        case "MONTHLY":
+          return calculateDiscount(
+            parseInt(item.mon_dol),
+            parseInt(item.mon_dol_discount),
+            parseInt(item.mon_aed),
+            parseInt(item.mon_aed_discount)
+          );
+        case "QUARTERLY":
+          return calculateDiscount(
+            parseInt(item.quar_dol),
+            parseInt(item.quar_dol_discount),
+            parseInt(item.quar_aed),
+            parseInt(item.quar_aed_discount)
+          );
+        case "YEARLY":
+          return calculateDiscount(
+            parseInt(item.y_dol),
+            parseInt(item.y_dol_discount),
+            parseInt(item.y_aed),
+            parseInt(item.y_aed_discount)
+          );
+      }
+    };
+
+    const calculateDiscount = (
+      dollAmount,
+      dollPercentage,
+      aedAmount,
+      aedPercentage
+    ) => {
+      if (currency.usd == 0) {
+        return dollAmount - (dollAmount * dollPercentage) / 100;
+      } else if (currency.aed === 1) {
+        return aedAmount - (aedAmount * aedPercentage) / 100;
+      }
+    };
+
+    const isDiscountAvailable = (item) => {
+      switch (billingCycle) {
+        case "MONTHLY":
+          if (currency.usd === 0 && checkValidity(item.mon_dol_discount)) {
+            return true;
+          } else if (
+            currency.usd === 0 &&
+            checkValidity(item.mon_aed_discount)
+          ) {
+            return true;
+          }
+          return false;
+        case "QUARTERLY":
+          if (currency.usd === 0 && checkValidity(item.quar_dol_discount)) {
+            return true;
+          } else if (
+            currency.usd === 0 &&
+            checkValidity(item.quar_aed_discount)
+          ) {
+            return true;
+          }
+          return false;
+
+        case "YEARLY":
+          if (currency.usd === 0 && checkValidity(item.y_dol_discount)) {
+            return true;
+          } else if (currency.usd === 0 && checkValidity(item.y_aed_discount)) {
+            return true;
+          }
+          return false;
+
+        default:
+          return false;
+      }
+    };
+
+    const checkValidity = (val) => {
+      return val !== undefined && val !== "" && val !== null;
+    };
+
+    const getActuallAmount = (item) => {
+      switch (billingCycle) {
+        case "MONTHLY":
+          return currencyCheck()
+            ? parseInt(item.mon_dol)
+            : parseInt(item.mon_aed);
+        case "QUARTERLY":
+          return currencyCheck()
+            ? parseInt(item.quar_dol)
+            : parseInt(item.quar_aed);
+        case "YEARLY":
+          return currencyCheck() ? parseInt(item.y_dol) : parseInt(item.y_aed);
+      }
+    };
+
+    const getSavingAmount = (item) => {
+      let discount = 0;
+      discount = calculateDiscount(
+        parseInt(item.mon_dol),
+        parseInt(item.mon_dol_discount),
+        parseInt(item.mon_aed),
+        parseInt(item.mon_aed_discount)
+      );
+      switch (billingCycle) {
+        case "MONTHLY":
+          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*1 : (item.mon_aed - discount)*1);
+        case "QUARTERLY":
+          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*3 : (item.mon_aed - discount)*3);
+        case "YEARLY":
+          return Math.floor(currencyCheck() ? (item.mon_dol - discount)*12 : (item.mon_aed - discount)*12);
+      }
+    };
 
     return (
       <div key={item.id} className={`${styles.pricing_item} card`}>
@@ -85,17 +156,26 @@ const PricingCard = ({loading, packages}) => {
           <div
             className={`${styles.heading_style_h4} ${styles.text_color_primary}`}
           >
-            <span className={styles.heading_style_h5}>USD</span> ${item.mon_dol}
-            {billingCycle !== "MONTHLY" && (
-              <span className={styles.billing_savings}>/mo {item.savings}</span>
+            <span className={styles.heading_style_h5}>
+              {currencyCheck() ? "USD" : "AED"}
+            </span>{" "}
+            {currencyCheck() && "$"}
+            {isDiscountAvailable(item)
+              ? discountedAmount(item)
+              : getActuallAmount(item)}
+            {isDiscountAvailable(item) && (
+              <span className={styles.billing_savings}>/mo {getSavingAmount(item)}{currencyCheck() ? '$': 'aed'}</span>
             )}
-            {billingCycle === "MONTHLY" && <span>/mo</span>}
+            {!isDiscountAvailable(item) && <span>/mo</span>}
           </div>
-          {billingCycle !== "MONTHLY" && (
+
+          {isDiscountAvailable(item) && (
             <div className={styles.original_price}>
-              ${item.org_mon_dol}/mo originally
+              {currency.usd === 0 ? `$${item.mon_dol}` : `${item.mon_aed} aed.`}
+              /mo originally
             </div>
           )}
+
           <div className={styles.divider}></div>
 
           <div className={styles.pricing_list_wrapper}>
@@ -105,7 +185,7 @@ const PricingCard = ({loading, packages}) => {
                 <div className={styles.pricing_list_item}>
                   <FaCheck className={styles.pricing_icon2} />
                   <div className={styles.text_size_small}>
-                    {item.features[0].name}
+                    {item.features[0]?.name}
                   </div>
                   <div
                     className={styles.tooltip_icon}
@@ -120,7 +200,7 @@ const PricingCard = ({loading, packages}) => {
                 <div className={styles.pricing_list_item}>
                   <FaCheck className={styles.pricing_icon2} />
                   <div className={styles.text_size_small}>
-                    {item.features[1].name}
+                    {item.features[1]?.name}
                   </div>
                 </div>
 
@@ -157,7 +237,9 @@ const PricingCard = ({loading, packages}) => {
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     data-bs-placement="right"
-                    title={item.design_services.map(item=>item.name).join("<br/>")}
+                    title={item.design_services
+                      .map((item) => item.name)
+                      .join("<br/>")}
                   >
                     <BsQuestionSquareFill className={styles.pricing_icon3} />
                   </div>
@@ -171,7 +253,9 @@ const PricingCard = ({loading, packages}) => {
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     data-bs-placement="right"
-                    title={item.design_services.map(item=>item.name).join("<br/>")}
+                    title={item.design_services
+                      .map((item) => item.name)
+                      .join("<br/>")}
                   >
                     <BsQuestionSquareFill className={styles.pricing_icon3} />
                   </div>
@@ -291,9 +375,9 @@ const PricingCard = ({loading, packages}) => {
     );
   };
 
-   if(loading){
-      return <div>Loading...</div>
-    }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -344,9 +428,7 @@ const PricingCard = ({loading, packages}) => {
         </div>
 
         <div className={styles.pricing_grid}>
-          {packages.map((item)=>(
-            renderPricingCard(item)
-          ))}
+          {packages.map((item) => renderPricingCard(item))}
         </div>
       </div>
     </>

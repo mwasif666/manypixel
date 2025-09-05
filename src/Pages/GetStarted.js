@@ -1,4 +1,3 @@
-import React from "react";
 import StepperForm from "../Components/StepperForm";
 import styles from "../Components/StepperForm.module.css";
 import PlanSummary from "../Components/PlanSummary";
