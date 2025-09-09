@@ -11,6 +11,8 @@ const PlanSummary = ({ setSelectedPlanData }) => {
   const [billing, setBilling] = useState("yearly");
   const [showModal, setShowModal] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState({});
+  const [billingCycle, setBillingCycle] = useState("MONTHLY");
+
   let [plans, setPlans] = useState({});
 
   const getPackageData = async () => {
@@ -35,7 +37,6 @@ const PlanSummary = ({ setSelectedPlanData }) => {
   useEffect(() => {
     getPackageData();
   }, []);
-
 
   const currency = {
     usd: 0,
@@ -127,7 +128,6 @@ const PlanSummary = ({ setSelectedPlanData }) => {
     };
 
     setPlans(newPlans);
-
     setSelectedPlanData({
       package: selectedPackage,
       billing,
@@ -139,6 +139,16 @@ const PlanSummary = ({ setSelectedPlanData }) => {
   useEffect(() => {
     makeData(selectedPackage);
   }, [selectedPackage, billing]);
+
+  useEffect(() => {
+    if (billingCycle === "MONTHLY") {
+      setBilling('monthly');
+    } else if (billingCycle === "QUARTERLY") {
+      setBilling('quarterly');
+    } else if (billingCycle === "YEARLY") {
+      setBilling('yearly');
+    }
+  }, [billingCycle]);
 
   return (
     <>
@@ -215,8 +225,10 @@ const PlanSummary = ({ setSelectedPlanData }) => {
           <PricingCard
             loading={loading}
             packages={packages}
+            billingCycle={billingCycle}
             setSelectedPackage={setSelectedPackage}
             setShowModal={setShowModal}
+            setBillingCycle={setBillingCycle}
           />
         </Modal.Body>
         <Modal.Footer>

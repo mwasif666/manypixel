@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./StepperForm.module.css";
 import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const StepperForm = ({selectedPlanData}) => {
+const StepperForm = ({ selectedPlanData }) => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
@@ -134,28 +134,35 @@ const StepperForm = ({selectedPlanData}) => {
 
     const hasErrors = Object.values(errors).some((err) => err);
     if (hasErrors) return;
-    try {
-      const data = new FormData();
-      data.append("name", formData.firstName);
-      data.append("last_name", formData.lastName);
-      data.append("company", formData.companyName);
-      data.append("website", formData.website);
-      data.append("job_title", formData.jobTitle);
-      data.append("email", formData.email);
-      data.append("password", formData.password);
-      data.append("password_confirmation", formData.confirmPassword);
-      data.append("package_id", selectedPlanData.package.id || 0);
 
-      const res = await axios.post(
-        "https://manypixel.innovationpixel.com/onboard",
-        data,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      console.log("Form submitted:", res.data);
+    if (step < steps.length - 1) {
       nextStep();
-    } catch (error) {
-      makeError(error, toast);
+    } else {
+      try {
+        const data = new FormData();
+        data.append("name", formData.firstName);
+        data.append("last_name", formData.lastName);
+        data.append("company", formData.companyName);
+        data.append("website", formData.website);
+        data.append("job_title", formData.jobTitle);
+        data.append("email", formData.email);
+        data.append("password", formData.password);
+        data.append("password_confirmation", formData.confirmPassword);
+        data.append("package_id", selectedPlanData.package.id || 0);
+        data.append("billing_type", selectedPlanData.billing);
+        data.append("billing_type", selectedPlanData.billing);
+        data.append("billing_amount", selectedPlanData.selectedPlan.total);
+        data.append("currency", selectedPlanData.currency || 'USD');
+
+        await axios.post(
+          "https://manypixel.innovationpixel.com/onboard",
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        nextStep();
+      } catch (error) {
+        makeError(error, toast);
+      }
     }
   };
 
@@ -490,13 +497,14 @@ const StepperForm = ({selectedPlanData}) => {
                 {step === steps.length - 1 ? "Submit" : "Next"}
               </Button>
             ) : (
-              <Button
-                variant="success"
-                onClick={() => setStep(2)}
-                className={styles.restartButton}
-              >
-                Start New Registration
-              </Button>
+              null
+              // <Button
+              //   variant="success"
+              //   onClick={() => setStep(2)}
+              //   className={styles.restartButton}
+              // >
+              //   Start New Registration
+              // </Button>
             )}
           </div>
         </Form>

@@ -4,8 +4,7 @@ import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
 
-const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal}) => {
-  const [billingCycle, setBillingCycle] = useState("MONTHLY");
+const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, billingCycle, setBillingCycle}) => {
 
   useEffect(() => {
     const tooltipTriggerList = [].slice.call(
@@ -406,7 +405,7 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal}) => 
                 QUARTERLY
                 <span className={styles.savings_badge}>
                   {" "}
-                  <div class={styles.pricing_dec_6}></div>
+                  <div className={styles.pricing_dec_6}></div>
                 </span>
               </button>
               <button
@@ -418,12 +417,12 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal}) => 
                 YEARLY
                 <span className={styles.savings_badge}>
                   {" "}
-                  <div class={styles.pricing_dec_5}></div>
+                  <div className={styles.pricing_dec_5}></div>
                   <img
                     loading="lazy"
                     src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6690f52c3a4851ffa8d01f42_Group%204953.webp"
                     alt="The most popular logo."
-                    class={styles.pricing_featured_image}
+                    className={styles.pricing_featured_image}
                   ></img>
                 </span>
               </button>
