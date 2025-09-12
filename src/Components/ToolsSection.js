@@ -98,17 +98,6 @@ const ToolsSection = () => {
             borderRadius: "30px",
           }}
         >
-          <div className="col-md-8 mb-4 mb-md-0">
-            <div className={styles.business_heading_wrapper}>
-              <div className={`${styles.text_size_tiny} text-uppercase mb-2`}>
-                OUR TOOLS
-              </div>
-              <h2 className={`${styles.heading_style_h2} mb-0`}>
-                Complete and open communication for workflows, submit requests
-                or just contact your manager
-              </h2>
-            </div>
-          </div>
           <div className="col-md-4">
             <div className={`${styles.business_right}`}>
               <div className="row">
@@ -173,6 +162,17 @@ const ToolsSection = () => {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="col-md-8 mb-4 mb-md-0">
+            <div className={styles.business_heading_wrapper}>
+              <div className={`${styles.text_size_tiny} text-uppercase mb-2`}>
+                OUR TOOLS
+              </div>
+              <h2 className={`${styles.heading_style_h2} mb-0`}>
+                Complete and open communication for workflows, submit requests
+                or just contact your manager
+              </h2>
             </div>
           </div>
         </div>
