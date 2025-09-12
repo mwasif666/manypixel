@@ -14,19 +14,19 @@ const Advantage2Section = () => {
                   <div id="w-node" className={styles.advantages_text_wrapper}>
                     <div className={styles.advantages_heading_text}>
                       <h4 className={styles.text_size_tini}>
-                        WHAT IF THERE WAS A BETTER SOLUTION?
+                        HERES THE EASY SOULTION
                       </h4>
                       <h2
                         className={`${styles.heading_style_h2} ${styles.smaller}`}
                       >
-                        Meet your virtual design team
+                        Meet your personal design team
                       </h2>
                     </div>
                     <p
                       className={`${styles.text_size_large} ${styles.smaller} ${styles.width}`}
                     >
-                      ManyPixels provides you with vetted designers for a flat
-                      monthly fee. No hiring, no contracts, no stress.
+                      Roots provides you with proffesional desingers and account
+                      managers for a fixed fee, no extra hassle
                     </p>
                   </div>
                 </div>

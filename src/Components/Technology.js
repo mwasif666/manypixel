@@ -11,10 +11,18 @@ const Technology = () => {
               <div className={styles.aboutHomeHeadingWrapper}>
                 <div className={styles.textSizeTini}>POWERED BY TECHNOLOGY</div>
                 <h2 className={`${styles.headingStyleH2} ${styles.smaller}`}>
-                  Manage everything from one simple platform
+                  Manage everything from our platform or stay connected with us
                 </h2>
               </div>
 
+              <div className={styles.iconsanimated}>
+                <img src="./images/social/whatsapp.svg" alt="" />
+                <img src="./images/social/gmail.svg" alt="" />
+                <img src="./images/social/outlook.svg" alt="" />
+                <img src="./images/social/business.svg" alt="" />
+                <img src="./images/social/meet.svg" alt="" />
+                <img src="./images/social/slack.svg" alt="" />
+              </div>
               <div className={styles.aboutHomeList}>
                 <div className={styles.aboutHomeListItem}>
                   <div className={styles.aboutHomeListIcon}></div>

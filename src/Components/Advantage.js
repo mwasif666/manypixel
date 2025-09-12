@@ -25,20 +25,19 @@ const AdvantagesSection = () => {
                 <div id="w-node" className={styles.advantages_text_wrapper}>
                   <div className={styles.advantages_heading_text}>
                     <h4 className={styles.text_size_tini}>
-                      NEED A DESIGnER ASAP?
+                      YOUR DESIGNS NEEDS ATTENTION!
                     </h4>
                     <h2
                       className={`${styles.heading_style_h2} ${styles.smaller}`}
                     >
-                      Hiring a designer should be simple
+                      Getting your designs should be simple
                     </h2>
                   </div>
                   <p
                     className={`${styles.text_size_large} ${styles.padding_right}`}
                   >
-                    Finding quality and reliable freelancers takes a lot of time
-                    and luck. In-house hires are expensive and can create HR
-                    drama.
+                    you need a team that actually cares, and deliver what you
+                    need! inhouse hires are expensive with more HR hassle
                   </p>
                 </div>
               </div>

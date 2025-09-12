@@ -4,15 +4,15 @@ import styles from "./ToolsSection.module.css";
 const ToolsSection = () => {
   return (
     <section className={`${styles.section_businesses} py-5`}>
-      <div
-        className="container"
-        style={{
-          backgroundColor: "#f8f8f8",
-          padding: "3.75rem 3.125rem",
-          borderRadius: "30px",
-        }}
-      >
-        <div className="row align-items-center">
+      <div className="container">
+        <div
+          className="row align-items-center"
+          style={{
+            backgroundColor: "#f8f8f8",
+            padding: "3.75rem 3.125rem",
+            borderRadius: "30px",
+          }}
+        >
           <div className="col-md-8 mb-4 mb-md-0">
             <div className={styles.business_heading_wrapper}>
               <div className={`${styles.text_size_tiny} text-uppercase mb-2`}>
@@ -79,6 +79,92 @@ const ToolsSection = () => {
                 <div className="col-4 mt-4">
                   <img
                     src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6481ba63af835b5134efa34e_image%2081.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="Figma Logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mt-5 row align-items-center"
+          style={{
+            backgroundColor: "#f8f8f8",
+            padding: "3.75rem 3.125rem",
+            borderRadius: "30px",
+          }}
+        >
+          <div className="col-md-8 mb-4 mb-md-0">
+            <div className={styles.business_heading_wrapper}>
+              <div className={`${styles.text_size_tiny} text-uppercase mb-2`}>
+                OUR TOOLS
+              </div>
+              <h2 className={`${styles.heading_style_h2} mb-0`}>
+                Complete and open communication for workflows, submit requests
+                or just contact your manager
+              </h2>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className={`${styles.business_right}`}>
+              <div className="row">
+                <div className="col-4">
+                  <img
+                    src="./images/social/whatsapp.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="Photoshop logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+                <div className="col-4">
+                  <img
+                    src="./images/social/gmail.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="Illustrator Logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+                <div className="col-4">
+                  <img
+                    src="./images/social/outlook.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="Canva logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+                <div className="col-4 mt-4">
+                  <img
+                    src="./images/social/business.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="Indesign logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+                <div className="col-4 mt-4">
+                  <img
+                    src="./images/social/meet.svg"
+                    loading="lazy"
+                    width="70"
+                    height="70"
+                    alt="After Effects logo"
+                    className={styles.businesses_logo}
+                  />
+                </div>
+                <div className="col-4 mt-4">
+                  <img
+                    src="./images/social/slack.svg"
                     loading="lazy"
                     width="70"
                     height="70"

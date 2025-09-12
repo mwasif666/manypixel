@@ -18,11 +18,11 @@ const HeroSection = () => {
             <div className="col-lg-6">
               <div className={styles.header_texts_wrapper}>
                 <h1 className={styles.header_title}>
-                  On-Demand Graphic <br />& Web Design
+                  Your Partner in Graphic <br /> & Webdesign
                 </h1>
                 <p className={`${styles.header_subtitle} text-large`}>
-                  Get access to our creative team in a few clicks. <br />
-                  Simple, fast, and affordable.
+                  Get your personalized design team right away simple,
+                  personalised and affordable
                 </p>
               </div>
               <a
@@ -70,7 +70,7 @@ const HeroSection = () => {
         <Modal.Header closeButton>
           <div className={styles.modalHeaderContent}>
             <div className={styles.modalLogo}>mp.</div>
-            <Modal.Title>ManyPixels | On-demand Graphic Design</Modal.Title>
+            <Modal.Title> Your Partner in Graphic & Webdesign</Modal.Title>
           </div>
         </Modal.Header>
         <Modal.Body>

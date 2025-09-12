@@ -14,20 +14,20 @@ const Achievements = () => {
                   <div className="col-lg-12">
                     <div className={styles.achievements_numbers_items}>
                       <h2 className={styles.achievements_numbers_heading}>
-                        150,000+
+                        50,000+
                       </h2>
                       <div className={styles.text_regular}>
-                        Designs Completed
+                        Projects completed
                       </div>
                     </div>
                   </div>
                   <div className="col-lg-12">
                     <div className={styles.achievements_numbers_items}>
                       <h2 className={styles.achievements_numbers_heading}>
-                        3,000+
+                        350+
                       </h2>
                       <div className={styles.text_regular}>
-                        Customers Served
+                        on going clients
                       </div>
                     </div>
                   </div>
