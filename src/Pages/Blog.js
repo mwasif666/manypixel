@@ -41,7 +41,7 @@ const Blog = () => {
   }
 
   const featuredBlog = blogs[0]; 
-  const otherBlogs = blogs
+  const otherBlogs = blogs.slice(1);
 
   return (
     <div className={styles.blogHome}>
@@ -69,9 +69,9 @@ const Blog = () => {
                     <div className={`row ${styles.twelveColGrid}`}>
                       <div className={`col-md-6 ${styles.blogHomeItemHover}`}>
                           <img
-                            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${featuredBlog.encoded_name}`}
+                            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${featuredBlog?.document?.encoded_name}`}
                             loading="lazy"
-                            alt={featuredBlog.image_alt_text}
+                            alt={featuredBlog?.document?.image_alt_text}
                             className={styles.blogCatThumbImage}
                           />
                         <div className={styles.blogHomeDecText}>READ BLOG</div>
@@ -80,12 +80,11 @@ const Blog = () => {
                       <div
                         className={`col-md-6 ${styles.blogHomeFeaturesTextWrapper}`}
                       >
-                        <h1>{featuredBlog.title}</h1>
+                        <h1>{featuredBlog.meta_title}</h1>
                         <p
                           className={`${styles.textSizeSmall} ${styles.textColorGrey}`}
-                        >
-                          {featuredBlog.description}
-                        </p>
+                          dangerouslySetInnerHTML={{ __html: featuredBlog.description }}
+                        ></p>
                         <div className={styles.blogHomeFeaturesBottom}>
                           <div className={styles.tag}>
                             {featuredBlog.category}
@@ -125,15 +124,15 @@ const Blog = () => {
                     >
                       <div className={styles.blogHomeItemHover}>
                         <img
-                          src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog.encoded_name}`}
+                          src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog?.document?.encoded_name}`}
                           loading="lazy"
-                          alt={blog.image_alt_text}
+                          alt={blog?.document?.image_alt_text}
                           className={styles.blogHomeItemThumb}
                         />
                         <div className={styles.blogHomeDecText}>READ BLOG</div>
                         <div className={styles.blogHomeGrad}></div>
                       </div>
-                      <h2 className={styles.headingStyleH5}>{blog.title}</h2>
+                      <h2 className={styles.headingStyleH5}>{blog.meta_title}</h2>
                       <div className={styles.blogBottom}>
                         <div className={styles.tag}>{blog.category}</div>
                         {/* <div className={styles.blogDate}>
@@ -168,4 +167,3 @@ const Blog = () => {
 };
 
 export default Blog;
-  

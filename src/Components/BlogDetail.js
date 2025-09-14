@@ -32,14 +32,13 @@ const BlogDetail = () => {
       if (response?.data?.data?.[0]) {
         const blogData = response.data.data[0];
         setBlog({
-          title: blogData.title || "",
+          title: blogData.title || blogData.meta_title,
           url: blogData.url || "",
           short_description: blogData.short_description || "",
-          long_description:
-            blogData.long_description || blogData.short_description || "",
-          encoded_name: blogData.encoded_name || "",
+          long_description: blogData.description || blogData.description || "",
+          encoded_name: blogData.document.encoded_name || "",
           created_at: blogData.created_at || "",
-          image_alt_text: blogData.image_alt_text || "",
+          image_alt_text: blogData.document.image_alt_text || "",
           meta_title: blogData.meta_title || "",
           meta_description: blogData.meta_description || "",
           id: blogData.id || "",
@@ -47,6 +46,7 @@ const BlogDetail = () => {
           tags: blogData.tags || [],
           sub_category: blogData.sub_category || "",
           category: blogData.category || "",
+          date: blogData.created_at,
         });
       }
     } catch (error) {
@@ -86,7 +86,14 @@ const BlogDetail = () => {
             <span className={styles.blogCategory}>
               {blog.category.toLocaleUpperCase()}
             </span>
-            <span className={styles.blogDate}>{blog.date}</span>
+            <span className={styles.blogDate}>
+              {new Date(blog.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+
             <span className={styles.readTime}>{blog.readTime} read</span>
           </div>
           <h1 className={styles.blogTitle}>{blog.title}</h1>
