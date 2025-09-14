@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../style/PricingCard.module.css";
 import { BsQuestionSquareFill } from "react-icons/bs";
 import { FaCheck, FaLock } from "react-icons/fa";
 import { Tooltip } from "bootstrap";
+import { PricingContext } from "../contexts/PricingContext";
 
-const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, billingCycle, setBillingCycle}) => {
+const PricingCard = ({ setShowModal }) => {
+  const {
+    packages,
+    loading,
+    setSelectedPackage,
+    billingCycle,
+    setBillingCycle,
+    isUSD,
+  } = useContext(PricingContext);
 
   useEffect(() => {
     const tooltipTriggerList = [].slice.call(
@@ -21,16 +30,6 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
   };
 
   const renderPricingCard = (item) => {
-    const currency = {
-      usd: 0,
-      aed: 1,
-    };
-
-    const currencyCheck = () => {
-      // default to USD
-      return currency.usd === 0 ? true : false;
-    };
-
     const calculateDiscount = (
       dollAmount,
       dollPercentage,
@@ -42,7 +41,7 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
       const aAmt = safeParseInt(aedAmount);
       const aPct = safeParseInt(aedPercentage);
 
-      if (currencyCheck()) {
+      if (isUSD) {
         return dAmt - (dAmt * dPct) / 100;
       } else {
         return aAmt - (aAmt * aPct) / 100;
@@ -84,15 +83,15 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
     const isDiscountAvailable = (item) => {
       switch (billingCycle) {
         case "MONTHLY":
-          return currencyCheck()
+          return isUSD
             ? checkValidity(item.mon_dol_discount)
             : checkValidity(item.mon_aed_discount);
         case "QUARTERLY":
-          return currencyCheck()
+          return isUSD
             ? checkValidity(item.quar_dol_discount)
             : checkValidity(item.quar_aed_discount);
         case "YEARLY":
-          return currencyCheck()
+          return isUSD
             ? checkValidity(item.y_dol_discount)
             : checkValidity(item.y_aed_discount);
         default:
@@ -103,17 +102,11 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
     const getActuallAmount = (item) => {
       switch (billingCycle) {
         case "MONTHLY":
-          return currencyCheck()
-            ? safeParseInt(item.mon_dol)
-            : safeParseInt(item.mon_aed);
+          return isUSD ? safeParseInt(item.mon_dol) : safeParseInt(item.mon_aed);
         case "QUARTERLY":
-          return currencyCheck()
-            ? safeParseInt(item.quar_dol)
-            : safeParseInt(item.quar_aed);
+          return isUSD ? safeParseInt(item.quar_dol) : safeParseInt(item.quar_aed);
         case "YEARLY":
-          return currencyCheck()
-            ? safeParseInt(item.y_dol)
-            : safeParseInt(item.y_aed);
+          return isUSD ? safeParseInt(item.y_dol) : safeParseInt(item.y_aed);
         default:
           return 0;
       }
@@ -124,19 +117,19 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
       switch (billingCycle) {
         case "MONTHLY":
           return Math.floor(
-            currencyCheck()
+            isUSD
               ? safeParseInt(item.mon_dol) - discount
               : safeParseInt(item.mon_aed) - discount
           );
         case "QUARTERLY":
           return Math.floor(
-            currencyCheck()
+            isUSD
               ? (safeParseInt(item.quar_dol) - discount) * 3
               : (safeParseInt(item.quar_aed) - discount) * 3
           );
         case "YEARLY":
           return Math.floor(
-            currencyCheck()
+            isUSD
               ? (safeParseInt(item.y_dol) - discount) * 12
               : (safeParseInt(item.y_aed) - discount) * 12
           );
@@ -147,7 +140,9 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
 
     const setPackage = (item) => {
       setSelectedPackage(item);
-      setShowModal(false);
+      if (setShowModal) {
+        setShowModal(false);
+      }
     };
 
     return (
@@ -165,16 +160,16 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
             className={`${styles.heading_style_h4} ${styles.text_color_primary}`}
           >
             <span className={styles.heading_style_h5}>
-              {currencyCheck() ? "USD" : "AED"}
+              {isUSD ? "USD" : "AED"}
             </span>{" "}
-            {currencyCheck() && "$"}
+            {isUSD && "$"}
             {isDiscountAvailable(item)
               ? discountedAmount(item)
               : getActuallAmount(item)}
             {isDiscountAvailable(item) && (
               <span className={styles.billing_savings}>
                 /mo {getSavingAmount(item)}
-                {currencyCheck() ? "$" : "aed"}
+                {isUSD ? "$" : "AED"}
               </span>
             )}
             {!isDiscountAvailable(item) && <span>/mo</span>}
@@ -182,7 +177,7 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
 
           {isDiscountAvailable(item) && (
             <div className={styles.original_price}>
-              {currency.usd === 0 ? `$${item.mon_dol}` : `${item.mon_aed} aed.`}
+              {isUSD ? `$${item.mon_dol}` : `${item.mon_aed} AED.`}
               /mo originally
             </div>
           )}
@@ -369,9 +364,9 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
 
           <button
             className={`${styles.button} ${styles.width} ${styles.auto_top}`}
-            onClick={()=>setPackage(item)}
+            onClick={() => setPackage(item)}
           >
-            "GET STARTED
+            GET STARTED
           </button>
         </div>
       </div>
@@ -431,7 +426,7 @@ const PricingCard = ({ loading, packages, setSelectedPackage, setShowModal, bill
         </div>
 
         <div className={styles.pricing_grid}>
-          {packages.map((item) => renderPricingCard(item))}
+          {packages?.map((item) => renderPricingCard(item))}
         </div>
       </div>
     </>

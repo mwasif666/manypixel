@@ -4,7 +4,7 @@ import PlanSummary from "../Components/PlanSummary";
 import { useState } from "react";
 
 const GetStarted = () => {
-  const [selectedPlanData, setSelectedPlanData] = useState()
+  const [selectedPlanData, setSelectedPlanData] = useState();
   return (
     <>
       <section className={styles.started}>

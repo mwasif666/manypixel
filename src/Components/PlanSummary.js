@@ -1,145 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./PlanSummary.module.css";
 import { Card, Form, Modal, Button } from "react-bootstrap";
 import PricingCard from "../Pages/Pricing";
+import { PricingContext } from "../contexts/PricingContext";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 const PlanSummary = ({ setSelectedPlanData }) => {
-  const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [billing, setBilling] = useState("yearly");
+  const [billing, setBilling] = useState("monthly");
   const [showModal, setShowModal] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState({});
-  const [billingCycle, setBillingCycle] = useState("MONTHLY");
 
-  let [plans, setPlans] = useState({});
+  const {
+    packages,
+    loading,
+    selectedPackage,
+    setSelectedPackage,
+    billingCycle,
+    setBillingCycle,
+    plans,
+    currency,
+    isUSD
+  } = useContext(PricingContext);
 
-  const getPackageData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://manypixel.innovationpixel.com/packages_api`
-      );
-      if (response.data.data) {
-        setPackages(response.data.data);
-        setSelectedPackage(response.data.data[0]);
-        makeData(response.data.data[0]);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to get package!");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getPackageData();
-  }, []);
-
-  const currency = {
-    usd: 0,
-    aed: 1,
-  };
-
-  const currencyCheck = (currencyVal = "") => {
-    // Todo: return currency.usd === currenyy ?  true : false;
-    return currency.usd === 0 ? true : false;
-  };
-  const makeData = (selectedPackage) => {
-    if (!selectedPackage) return;
-
-    const isUSD = currencyCheck();
-
-    const getPrice = (base, discount) => {
-      const amount = parseFloat(base) || 0;
-      const disc = parseFloat(discount) || 0;
-
-      if (disc > 0) {
-        return (amount * (1 - disc / 100)).toFixed(2);
-      }
-      return amount.toFixed(2);
-    };
-
-    const getTotal = (base, discount, multiplier) => {
-      const price = parseFloat(getPrice(base, discount));
-      return price * multiplier;
-    };
-
-    const newPlans = {
-      yearly: {
-        price: getPrice(
-          isUSD ? selectedPackage.y_dol : selectedPackage.y_aed,
-          isUSD
-            ? selectedPackage.y_dol_discount
-            : selectedPackage.y_aed_discount
-        ),
-        total: getTotal(
-          isUSD ? selectedPackage.y_dol : selectedPackage.y_aed,
-          isUSD
-            ? selectedPackage.y_dol_discount
-            : selectedPackage.y_aed_discount,
-          12
-        ),
-        label: "Billed yearly",
-        save: isUSD
-          ? `SAVE ${selectedPackage.y_dol_discount || 0}%`
-          : `SAVE ${selectedPackage.y_aed_discount || 0}%`,
-      },
-      quarterly: {
-        price: getPrice(
-          isUSD ? selectedPackage.quar_dol : selectedPackage.quar_aed,
-          isUSD
-            ? selectedPackage.quar_dol_discount
-            : selectedPackage.quar_aed_discount
-        ),
-        total: getTotal(
-          isUSD ? selectedPackage.quar_dol : selectedPackage.quar_aed,
-          isUSD
-            ? selectedPackage.quar_dol_discount
-            : selectedPackage.quar_aed_discount,
-          3
-        ),
-        label: "Billed quarterly",
-        save: isUSD
-          ? `SAVE ${selectedPackage.quar_dol_discount || 0}%`
-          : `SAVE ${selectedPackage.quar_aed_discount || 0}%`,
-      },
-      monthly: {
-        price: getPrice(
-          isUSD ? selectedPackage.mon_dol : selectedPackage.mon_aed,
-          isUSD
-            ? selectedPackage.mon_dol_discount
-            : selectedPackage.mon_aed_discount
-        ),
-        total: getTotal(
-          isUSD ? selectedPackage.mon_dol : selectedPackage.mon_aed,
-          isUSD
-            ? selectedPackage.mon_dol_discount
-            : selectedPackage.mon_aed_discount,
-          1
-        ),
-        label: "Billed monthly",
-        save: isUSD
-          ? `SAVE ${selectedPackage.mon_dol_discount || 0}%`
-          : `SAVE ${selectedPackage.mon_aed_discount || 0}%`,
-      },
-    };
-
-    setPlans(newPlans);
-    setSelectedPlanData({
-      package: selectedPackage,
-      billing,
-      selectedPlan: newPlans[billing],
-      currency: isUSD ? "USD" : "AED",
-    });
-  };
-
-  useEffect(() => {
-    makeData(selectedPackage);
-  }, [selectedPackage, billing]);
-
+  // Map billingCycle to billing key
   useEffect(() => {
     if (billingCycle === "MONTHLY") {
       setBilling('monthly');
@@ -149,6 +31,24 @@ const PlanSummary = ({ setSelectedPlanData }) => {
       setBilling('yearly');
     }
   }, [billingCycle]);
+
+  // Update selectedPlanData using context values
+  useEffect(() => {
+    if (selectedPackage && plans[billing]) {
+      setSelectedPlanData({
+        package: selectedPackage,
+        billing,
+        selectedPlan: plans[billing],
+        currency: currency,
+      });
+    }
+  }, [selectedPackage, billing, plans, currency, setSelectedPlanData]);
+
+  const handleBillingChange = (newBilling) => {
+    setBilling(newBilling);
+    const newBillingCycle = newBilling.toUpperCase();
+    setBillingCycle(newBillingCycle);
+  };
 
   return (
     <>
@@ -194,7 +94,7 @@ const PlanSummary = ({ setSelectedPlanData }) => {
                   </div>
                 }
                 checked={billing === key}
-                onChange={() => setBilling(key)}
+                onChange={() => handleBillingChange(key)}
                 className={styles.radioOption}
               />
             ))}
@@ -204,7 +104,7 @@ const PlanSummary = ({ setSelectedPlanData }) => {
             <span>Billed today</span>
             <span className={styles.totalPrice}>
               {plans[billing] &&
-                `${currencyCheck() ? "$" : "AED"} ${plans[
+                `${isUSD ? "$" : "AED"} ${plans[
                   billing
                 ].total.toLocaleString()}`}
             </span>
@@ -222,14 +122,7 @@ const PlanSummary = ({ setSelectedPlanData }) => {
           <Modal.Title>Select Your Plan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PricingCard
-            loading={loading}
-            packages={packages}
-            billingCycle={billingCycle}
-            setSelectedPackage={setSelectedPackage}
-            setShowModal={setShowModal}
-            setBillingCycle={setBillingCycle}
-          />
+          <PricingCard setShowModal={setShowModal} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
