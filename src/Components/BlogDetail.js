@@ -69,7 +69,11 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
-        <div className={styles.loadingSpinner}></div>
+        <div className={styles.loadingSpinner}>
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -101,7 +105,7 @@ const BlogDetail = () => {
 
         <div className={styles.blogImageContainer}>
           <img
-            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog.encoded_name}`}
+            src={`https://manypixel.innovationpixel.com/storage/blog_image/${blog.encoded_name}`}
             alt={blog.image_alt_text}
             className={styles.blogImage}
           />

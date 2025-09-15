@@ -28,10 +28,15 @@ const Blog = () => {
     getBlogDetail();
   }, []);
 
+  
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
-        <div className={styles.loadingSpinner}></div>
+        <div className={styles.loadingSpinner}>
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -69,7 +74,7 @@ const Blog = () => {
                     <div className={`row ${styles.twelveColGrid}`}>
                       <div className={`col-md-6 ${styles.blogHomeItemHover}`}>
                           <img
-                            src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${featuredBlog?.document?.encoded_name}`}
+                            src={`https://manypixel.innovationpixel.com/storage/blog_image/${featuredBlog?.document?.encoded_name}`}
                             loading="lazy"
                             alt={featuredBlog?.document?.image_alt_text}
                             className={styles.blogCatThumbImage}
@@ -124,7 +129,7 @@ const Blog = () => {
                     >
                       <div className={styles.blogHomeItemHover}>
                         <img
-                          src={`https://manypixel.innovationpixel.com/storage/app/public/blogs/${blog?.document?.encoded_name}`}
+                          src={`https://manypixel.innovationpixel.com/storage/blog_image/${blog?.document?.encoded_name}`}
                           loading="lazy"
                           alt={blog?.document?.image_alt_text}
                           className={styles.blogHomeItemThumb}
