@@ -33,16 +33,17 @@ const Advantage2Section = () => {
 
                 {/* Image - Order changes on mobile */}
                 <div className="col-lg-6 d-flex justify-content-end ">
+                  {/* <video src="./manypixel.mp4" autoPlay loop muted></video> */}
+
                   <img
                     className={`${styles.advantages_image} ${styles.image_2}`}
-                    src="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1).avif"
-                    width="488"
-                    height="467"
+                    src="./gif.gif"
+                    width="100%"
+                    height="100%"
                     alt="Meet your virtual design team image"
                     sizes="(max-width: 479px) 87vw, (max-width: 991px) 382px, 3vw"
                     id="w-node-d3ca20d3-45a2-b08f-7d3b-86916c9bffdc-918f42ed"
                     loading="lazy"
-                    srcSet="https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1)-p-500.avif 500w, https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1)-p-800.avif 800w, https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1)-p-1080.avif 1080w, https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/6474e1026ecae38538626f70_group_4775%20(1).avif 1985w"
                   />
                 </div>
               </div>
